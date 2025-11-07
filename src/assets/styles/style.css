@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Doto:wght,ROND@300,100&family=JetBrains+Mono:wght@200&family=Ubuntu+Mono:wght@700&display=swap');
+@import "tailwindcss";
+
+:root {
+    --heading-font: "Ubuntu", sans-serif;
+    --primary-font: "JetBrains Mono", monospace;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+

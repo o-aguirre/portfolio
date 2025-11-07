@@ -1,0 +1,19 @@
+@import url("./../../assets/styles/style.css");
+
+.navbar {
+    background-color: #5E2750;
+    font-family: var(--heading-font);
+    font-size: 1rem;
+}
+
+.navbar .navbar-list li {
+    margin: 1rem;
+    padding: .1rem;
+}
+
+
+.navbar .navbar-list li:hover {
+    font-size: 1.05rem;
+    color: #dd4814;
+    transition: all 0.4s ease 0s;
+}

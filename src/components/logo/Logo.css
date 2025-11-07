@@ -1,0 +1,6 @@
+@import url("./../../assets/styles/style.css");
+
+.navbar-logo {
+    cursor: pointer;
+    padding: 0.5rem;
+}
