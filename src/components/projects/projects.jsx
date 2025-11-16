@@ -20,9 +20,9 @@ const Projects = () => {
         arrows: true,
         responsive: [
             {
-                breakpoint: 700,
+                breakpoint: 780,
                 settings: {
-                    slidersToShow: 1
+                    slidesToShow: 1,
                 }
             }
         ]

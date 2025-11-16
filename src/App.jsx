@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import Hero from './components/hero/Hero';
-import Projects from './components/projects/projects';
+import Projects from './components/projects/Projects';
 import Skills from './components/skills/Skills';
 import Contact from './components/contact/Contact';
 import Footer from './components/footer/Footer';
@@ -21,8 +21,8 @@ const App = () => {
     return(
         <main className='bg-[#0d182e]'>
             <Hero />
-            <Skills />
             <Projects />
+            <Skills />
             <Contact />
             <Footer />
         </main>
