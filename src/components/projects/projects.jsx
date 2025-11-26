@@ -37,7 +37,7 @@ const Projects = () => {
                         listProjects.map((project) => {
                             return (
                                 <div key={project.id} className="p-4">
-                                    <div className="h-full border-2 border-orange-400 shadow-[0_0_15px_rgba(255,165,0,0.7)] border-opacity-60 rounded-lg overflow-hidden">
+                                    <div className="h-full border border-gray-800 drop-shadow-[0_0_10px_rgba(60,39,245,0.8)] border-opacity-60 rounded-lg overflow-hidden">
                                         <img src={project.image} alt={project.title} className="w-full h-auto lg:h-48 md:h-36 sm:h-24 object-cover object-center" />
                                         <div className="p-6">
                                             <h2 className="tracking-widest text-xl title-font font-medium text-gray-400 mb-1">{project.title}</h2>
