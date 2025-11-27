@@ -10,7 +10,7 @@ const Skills = () => {
             <div className="container flex flex-wrap px-5 py-24 mx-auto items-center">
                 <div data-aos="fade-up" data-aos-delay="200" className="md:w-1/2 md:pr-12 md:py-8 md:border-r md:border-b-0 mb-10 md:mb-0 pd-10 border-b border-blue-900">
                     <h1 data-aos="fade-right" data-aos-delay="500" className="sm:text-4xl text-2xl font-medium title-font mb-2 text-white">Skills</h1>
-                    <p data-aos="fade-right" data-aos-delay="500" className="leading-relaxed text-base">My name is Onésimo Aguirre, and I am currently a Software Development student at DuocUC. Although I don't have professional experience yet, I have dedicated my studies to building a solid foundation in full-stack development.
+                    <p data-aos="fade-right" data-aos-delay="500" className="leading-relaxed">My name is Onésimo Aguirre, and I am currently a Software Development student at DuocUC. Although I don't have professional experience yet, I have dedicated my studies to building a solid foundation in full-stack development.
                         
                         I enjoy creating both robust server-side logic with Java and Spring Boot, as well as modern, interactive user interfaces with React. My knowledge of SQL allows me to manage data efficiently, and I use Git as a fundamental tool for an organized and collaborative workflow.
 

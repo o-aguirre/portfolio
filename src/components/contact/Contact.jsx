@@ -59,7 +59,7 @@ const Contact = () => {
                     <button 
                         type="submit"
                         disabled={isLoading}
-                        className="inline-flex text-white border bg-black border-gray-800 hover:border-blue-900 py-2 px-6 focus:outline-none hover:drop-shadow-[0_0_20px_rgba(60,39,245,0.8)] rounded-full text-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="inline-flex text-white border bg-black border-gray-800 hover:border-blue-900 py-2 px-6 focus:outline-none hover:drop-shadow-[0_0_20px_rgba(60,39,245,0.8)] hover:scale-103 rounded-full text-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                         {isLoading ? 'Sending...' : 'Send Message'}
                     </button>
