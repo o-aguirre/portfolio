@@ -15,7 +15,7 @@ const Hero = () => {
                     <div className="lg:grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center relative">
                         <h1 className="title-font sm:text-4xl text-4xl mb-4 font-bold text-white">Hi! I'm Onésimo</h1>
                         <ReactTyped
-                            className="text-xl font-bold my-6 py-3 px-6 bg-linear-to-r from-blue-600/20 to-purple-600/20 rounded-lg inline-block"
+                            className="text-xl font-bold my-4 py-3 px-4 bg-linear-to-r from-blue-600/20 to-purple-600/20 rounded-lg inline-block"
                             strings={[
                                 "Full-Stack Developer",
                                 "Continuos Learner",
