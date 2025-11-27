@@ -44,7 +44,7 @@ const Hero = () => {
                             </a>
                         </div>
                     </div>
-                    <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
+                    <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 flex justify-center items-center">
                         <img src={me} className="object-cover object-center rounded-full w-80 h-80 border border-gray-800 drop-shadow-[0_0_40px_rgba(60,39,245,0.4)] hover:drop-shadow-[0_0_50px_rgba(60,39,245,0.6)] transition-all duration-500" />
                     </div>
                 </div>
