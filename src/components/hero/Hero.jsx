@@ -3,6 +3,7 @@ import CV from './../../assets/CV.pdf'
 import me from './../../assets/o-aguirre.jpg'
 import github from './../../assets/github-icon.png'
 import linkedin from './../../assets/linkedin-icon.png'
+import { ReactTyped } from "react-typed";
 
 const Hero = () => {
     return (
@@ -13,9 +14,21 @@ const Hero = () => {
                 <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
                     <div className="lg:grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center relative">
                         <h1 className="title-font sm:text-4xl text-4xl mb-4 font-bold text-white">Hi! I'm Onésimo</h1>
+                        <ReactTyped
+                            className="text-xl font-bold my-6 py-3 px-6 bg-linear-to-r from-blue-600/20 to-purple-600/20 rounded-lg inline-block"
+                            strings={[
+                                "Full-Stack Developer",
+                                "Continuos Learner",
+                                "Problem Solver",
+                                "Team Player"
+                            ]}
+                            typeSpeed={50}
+                            backSpeed={30}
+                            loop
+                        />
                         <p className="mb-8 leading-relaxed text-gray-300 text-lg">A passionate Software Development student at DuocUC, focused on becoming a Full-Stack Developer. I specialize in building robust and dynamic solutions, connecting backend logic with Java and Spring Boot to frontend interactivity with React and JavaScript.</p>
                         <div className="mb-8 flex flex-row items-center gap-4">
-                            <span className="text-gray-300 text-lg">Social media links: </span>
+                            <span className="text-gray-300">Social media links :</span>
                             <a href="https://github.com/o-aguirre" target="_blank" className="inline-block size-10 hover:scale-110 transition-all duration-300">
                                 <img className="w-full h-full object-contain" src={github} alt="github icon" />
                             </a>
