@@ -23,7 +23,7 @@ const Navbar = () => {
                     }
                 </nav>
                 <a href="#contact">
-                    <button className="inline-flex items-center bg-black border border-gray-800 hover:border-blue-900 hover:drop-shadow-[0_0_20px_rgba(60,39,245,0.8)] py-2 px-6 rounded-full text-base mt-4 md:mt-0 text-white transition-all duration-300">
+                    <button className="inline-flex items-center bg-black border border-gray-800 hover:border-blue-900 hover:drop-shadow-[0_0_20px_rgba(60,39,245,0.8)] hover:scale-103 py-2 px-6 rounded-full text-base mt-4 md:mt-0 text-white transition-all duration-300">
                         Contact me
                     </button>
                 </a>
