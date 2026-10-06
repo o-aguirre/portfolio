@@ -21,6 +21,13 @@ Reposition the portfolio as a cybersecurity portfolio: terminal visual identity 
 
 ## Delivery
 - Strategy: `ask-on-risk`. Forecast ~700–900 authored changed lines → ask chain strategy before crossing ~400.
+- Chain strategy (owner choice): **stacked-to-main**. Push/PR creation remain the owner's decision.
+
+| Slice | Branch | Tasks | Base | Commits |
+|---|---|---|---|---|
+| 1 | `feature/terminal-writeups` | T1–T4 | `main` | `014b0e8`..this doc commit (367 authored lines before it) |
+| 2 | `feature/terminal-writeups-ui` | T5–T6 | slice 1 | — |
+| 3 | `feature/terminal-writeups-restyle` | T7 | slice 2 | — |
 
 ## Checklist
 - [x] T1 — Unblock build: rename `projects.jsx` → `Projects.jsx`. Route: inline (1 file). Evidence: `npm run build` ✓, commit `014b0e8`.
@@ -41,6 +48,7 @@ Reposition the portfolio as a cybersecurity portfolio: terminal visual identity 
 - T1–T3 slice (`6172916..bd2d9cf`): medium risk, consent granted, lens review-reliability → **approved**, acknowledged (lineage `review-7d18634b483297e1`). Reviewed boundary: `bd2d9cf`.
 - Advisory R3-001: `passWithNoTests` makes `npm test` vacuous → T4 removes it. R3-002: `pd-10` in Skills.jsx (pre-existing) → T7.
 - Authored lines so far (lockfile excluded): 128.
+- T4 (`bd2d9cf..49c6629`): assess risk medium (package-lock config change), `review_due=false` (`under_budget`) → pending in slice.
 
 ## Progress / next step
 Next: T5.
