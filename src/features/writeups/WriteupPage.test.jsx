@@ -36,4 +36,12 @@ describe('WriteupPage', () => {
     ).toBeTruthy()
     expect(screen.getByRole('link', { name: /cd \.\./ })).toBeTruthy()
   })
+
+  it('restores the previous document title on unmount', () => {
+    document.title = 'Original title'
+    const { unmount } = renderAt('/writeups/htb-example-machine')
+    expect(document.title).toBe('Example Machine')
+    unmount()
+    expect(document.title).toBe('Original title')
+  })
 })

@@ -7,3 +7,8 @@ const modules = import.meta.glob('/src/content/writeups/*.md', {
 })
 
 export const writeups = createWriteupRepository(modules)
+
+// Content errors must be visible without blanking the whole site.
+for (const { path, message } of writeups.errors) {
+  console.error(`Invalid writeup ${path}: ${message}`)
+}

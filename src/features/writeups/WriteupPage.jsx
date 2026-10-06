@@ -47,7 +47,12 @@ const WriteupPage = () => {
     const writeup = writeups.get(slug)
 
     useEffect(() => {
-        if (writeup) document.title = writeup.title
+        if (!writeup) return undefined
+        const previousTitle = document.title
+        document.title = writeup.title
+        return () => {
+            document.title = previousTitle
+        }
     }, [writeup])
 
     if (!writeup) {

@@ -30,7 +30,7 @@ Review the **changed lines** of the staged files. Pre-existing issues in untouch
 
 ## Security and config
 - No secrets in source. EmailJS service/template IDs belong in `import.meta.env` (`VITE_*`), not hardcoded in new code.
-- `console.log` is allowed only for the EmailJS response handling in `Contact.jsx`; reject it elsewhere.
+- `console.log` is allowed only for the EmailJS response handling in `Contact.jsx`; reject it elsewhere. `console.error` is also allowed in `src/features/writeups/index.js` to report invalid writeup content files once at load.
 
 ## Tests
 - Logic changes ship with tests in the same commit (`npm test`, Vitest).
