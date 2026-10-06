@@ -7,7 +7,7 @@ import { ReactTyped } from "react-typed";
 
 const Hero = () => {
     return (
-        <div className="relative overflow-hidden min-h-[550px] sm:min-h-[660px] flex flex-col">
+        <div id="home" className="relative overflow-hidden min-h-[550px] sm:min-h-[660px] flex flex-col">
 
             <Navbar />
             <section data-aos="fade-up" data-aos-delay="250" className="text-white z-10 pt-20">
