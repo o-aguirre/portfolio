@@ -10,10 +10,10 @@ const Hero = () => {
         <div className="relative overflow-hidden min-h-[550px] sm:min-h-[660px] flex flex-col">
 
             <Navbar />
-            <section data-aos="fade-up" data-aos-delay="250" className="text-white body-font z-10 pt-20">
+            <section data-aos="fade-up" data-aos-delay="250" className="text-white z-10 pt-20">
                 <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
                     <div className="lg:grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center relative">
-                        <h1 className="title-font sm:text-4xl text-4xl mb-4 font-bold text-white">Hi! I'm Onésimo</h1>
+                        <h1 className="sm:text-4xl text-4xl mb-4 font-bold text-white">Hi! I'm Onésimo</h1>
                         <ReactTyped
                             className="text-xl font-bold my-4 py-3 px-4 bg-linear-to-r from-blue-600/20 to-purple-600/20 rounded-lg inline-block"
                             strings={[
