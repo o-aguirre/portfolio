@@ -26,8 +26,8 @@ Reposition the portfolio as a cybersecurity portfolio: terminal visual identity 
 | Slice | Branch | Tasks | Base | Commits |
 |---|---|---|---|---|
 | 1 | `feature/terminal-writeups` | T1–T4 | `main` | `014b0e8`..this doc commit (367 authored lines before it) |
-| 2 | `feature/terminal-writeups-ui` | T5–T6 | slice 1 | `4e2d437`, `998012d` |
-| 3 | `feature/terminal-writeups-restyle` | T7 | slice 2 | — |
+| 2 | `feature/terminal-writeups-ui` | T5–T6 | slice 1 | `4e2d437`, `998012d`, `4f8fc01` |
+| 3 | `feature/terminal-writeups-restyle` | T7 | slice 2 | `accaebc` |
 
 ## Checklist
 - [x] T1 — Unblock build: rename `projects.jsx` → `Projects.jsx`. Route: inline (1 file). Evidence: `npm run build` ✓, commit `014b0e8`.
@@ -37,7 +37,8 @@ Reposition the portfolio as a cybersecurity portfolio: terminal visual identity 
 - [x] T4 — Writeup content model (TDD): `src/features/writeups/` (`parseWriteup`, `createWriteupRepository`, glob wiring in `index.js`), `front-matter` dep, sample writeup; removed `passWithNoTests` (R3-001). Route: delegated. Evidence: RED (3 suites failed, modules missing) → first GREEN run 12/13 (YAML rolls `2025-02-31` into a valid Date) → fixed by validating the raw date text → 13/13; `npm test`, `npm run lint`, `npm run build` exit 0; commit `5b9fefb`.
 - [x] T5 — HashRouter: `/` Home, `/writeups/:slug` lazy WriteupPage; navbar scroll helper (fixes `#home`). Route: delegated. Evidence: RED (`scrollToSection` module missing, suite failed) → GREEN 3/3; `npm test`, `npm run lint`, `npm run build` exit 0; commit `4e2d437`.
 - [x] T6 — Writeups UI (`ls -la` listing + markdown page with GFM + highlight); drop react-slick/slick-carousel and Projects. Route: delegated. Evidence: RED (WriteupsSection module missing; WriteupPage stub failed 3 tests) → GREEN 21/21 tests; `npm run lint`, `npm run build` exit 0; `rg 'slick|image1' src` and `rg 'dangerouslySetInnerHTML|rehype-raw' src` empty; preview `/portfolio/` HTTP 200; commit `998012d`.
-- [ ] T7 — Restyle Hero/Navbar/Footer/Skills/Contact/App/index.html; fix a11y defects in touched lines.
+- [x] T6b — Review fixes R3-001..003 (lineage `review-d33c7d70a0e2217a`, approved+acknowledged): restore `document.title` on unmount, `createWriteupRepository` skips invalid entries and exposes `errors` (logged via `console.error` in `index.js`, AGENTS.md exception added), navigation and `NavLinkButton` tests. Route: delegated. Evidence: RED (3 failing + suite load error) → GREEN 29/29; `npm test`, `npm run lint`, `npm run build` exit 0; commit `4f8fc01`.
+- [x] T7 — Restyle Hero/Navbar/Footer/Skills/Contact/App/index.html; fix a11y defects in touched lines. Route: delegated. Evidence: RED (6 new tests failed: two h1, alt, rel, nesting, CV link, Skills h2) → GREEN 35/35; `npm test`, `npm run lint`, `npm run build` exit 0; forbidden-class `rg` and `target="_blank"` without `rel=` checks empty; built `index.html` has new title, description and working favicon path; commit `accaebc`. Pending: owner visual pass at 360/768/1440.
 
 ## Acceptance criteria
 - `npm test`, `npm run lint`, `npm run build` green.
@@ -50,5 +51,7 @@ Reposition the portfolio as a cybersecurity portfolio: terminal visual identity 
 - Authored lines so far (lockfile excluded): 128.
 - T4 (`bd2d9cf..49c6629`): assess risk medium (package-lock config change), `review_due=false` (`under_budget`) → pending in slice.
 
+- T4–T6 (`bd2d9cf..31f5565`): medium, consent granted, review-reliability → approved, acknowledged (lineage `review-d33c7d70a0e2217a`); advisories R3-001..003 fixed in T6b. Reviewed boundary: `31f5565`.
+
 ## Progress / next step
-Next: T7.
+Next: owner visual pass at 360/768/1440 and push/PR decision.
