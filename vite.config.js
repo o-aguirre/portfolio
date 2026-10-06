@@ -9,7 +9,4 @@ export default defineConfig({
     tailwindcss(),
   ],
   base: '/portfolio',
-  test: {
-    passWithNoTests: true,
-  },
 })
