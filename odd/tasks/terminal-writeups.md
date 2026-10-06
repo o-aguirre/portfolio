@@ -52,6 +52,8 @@ Reposition the portfolio as a cybersecurity portfolio: terminal visual identity 
 - T4 (`bd2d9cf..49c6629`): assess risk medium (package-lock config change), `review_due=false` (`under_budget`) → pending in slice.
 
 - T4–T6 (`bd2d9cf..31f5565`): medium, consent granted, review-reliability → approved, acknowledged (lineage `review-d33c7d70a0e2217a`); advisories R3-001..003 fixed in T6b. Reviewed boundary: `31f5565`.
+- T6b–T7 (`31f5565..235a1d7`): medium, consent granted, review-reliability → approved, acknowledged (lineage `review-c7d6f30f77b00c2f`). Reviewed boundary: `235a1d7`.
+- Follow-ups (SUGGESTION, non-blocking): Contact `role="status"` region should always render (screen-reader announcement); navigation tests should restore `scrollIntoView` (use `vi.spyOn` + `restoreAllMocks`); test the load-time `console.error` reporting in `writeups/index.js`.
 
 ## Progress / next step
 Next: owner visual pass at 360/768/1440 and push/PR decision.
