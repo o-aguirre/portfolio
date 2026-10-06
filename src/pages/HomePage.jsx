@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import Hero from '../components/hero/Hero'
-import Projects from '../components/projects/Projects'
+import WriteupsSection from '../features/writeups/WriteupsSection'
 import Skills from '../components/skills/Skills'
 import Contact from '../components/contact/Contact'
 import Footer from '../components/footer/Footer'
@@ -18,7 +18,7 @@ const HomePage = () => {
     return (
         <>
             <Hero />
-            <Projects />
+            <WriteupsSection />
             <Skills />
             <Contact />
             <Footer />
