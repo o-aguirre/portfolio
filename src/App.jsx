@@ -20,7 +20,7 @@ const App = () => {
     }, [])
 
     return(
-        <main className='bg-[#000000]'>
+        <main className='bg-ansi-bg'>
             <Suspense fallback={<p className="font-mono text-ansi-gray p-5">loading...</p>}>
                 <Routes>
                     <Route path="/" element={<HomePage />} />
