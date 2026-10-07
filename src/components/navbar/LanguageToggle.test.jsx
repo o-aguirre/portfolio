@@ -15,27 +15,39 @@ const renderToggle = (initialLang) =>
   )
 
 describe('LanguageToggle', () => {
-  it('names the target language and highlights the active one', () => {
+  it('renders one plain-text button per language inside a labelled group', () => {
     renderToggle('en')
-    const button = screen.getByRole('button', { name: 'Switch language to Español' })
-    expect(button.textContent).toBe('[ EN | ES ]')
-    expect(screen.getByText('EN').className).toContain('text-ansi-green')
-    expect(screen.getByText('ES').className).not.toContain('text-ansi-green')
+    expect(screen.getByRole('group', { name: 'Language' })).toBeTruthy()
+    const en = screen.getByRole('button', { name: 'English' })
+    const es = screen.getByRole('button', { name: 'Español' })
+    expect(en.textContent).toBe('en')
+    expect(es.textContent).toBe('es')
+    expect(en.className).not.toContain('border')
   })
 
-  it('switches to Spanish on click and updates the accessible name', () => {
+  it('marks the active language as pressed and highlighted', () => {
     renderToggle('en')
-    fireEvent.click(screen.getByRole('button', { name: 'Switch language to Español' }))
-    expect(screen.getByRole('button', { name: 'Cambiar idioma a English' })).toBeTruthy()
-    expect(screen.getByText('ES').className).toContain('text-ansi-green')
+    const en = screen.getByRole('button', { name: 'English' })
+    const es = screen.getByRole('button', { name: 'Español' })
+    expect(en.getAttribute('aria-pressed')).toBe('true')
+    expect(en.className).toContain('text-ansi-green')
+    expect(es.getAttribute('aria-pressed')).toBe('false')
+    expect(es.className).toContain('text-ansi-gray')
+  })
+
+  it('switches to Spanish when es is clicked', () => {
+    renderToggle('en')
+    fireEvent.click(screen.getByRole('button', { name: 'Español' }))
+    expect(screen.getByRole('group', { name: 'Idioma' })).toBeTruthy()
+    expect(screen.getByRole('button', { name: 'Español' }).getAttribute('aria-pressed')).toBe('true')
     expect(document.documentElement.lang).toBe('es')
     expect(window.localStorage.getItem('lang')).toBe('es')
   })
 
-  it('switches back to English', () => {
+  it('switches back to English when en is clicked', () => {
     renderToggle('es')
-    fireEvent.click(screen.getByRole('button', { name: 'Cambiar idioma a English' }))
-    expect(screen.getByRole('button', { name: 'Switch language to Español' })).toBeTruthy()
+    fireEvent.click(screen.getByRole('button', { name: 'English' }))
+    expect(screen.getByRole('button', { name: 'English' }).getAttribute('aria-pressed')).toBe('true')
     expect(document.documentElement.lang).toBe('en')
   })
 })

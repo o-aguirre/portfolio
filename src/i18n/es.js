@@ -2,7 +2,7 @@
 const es = {
   "meta.title": "Onésimo Aguirre — Portafolio de ciberseguridad",
   "nav.contact": "./contact",
-  "lang.switchTo": "Cambiar idioma a English",
+  "lang.label": "Idioma",
   "hero.title": "¡Hola! Soy mephibosheth",
   "hero.about.1": "Estudiante de Ingeniería Informática en Duoc UC, enfocado en seguridad ofensiva. Vengo del desarrollo de software, así que entiendo cómo se construyen las aplicaciones que hoy aprendo a romper. Resuelvo máquinas en HackTheBox y DockerLabs, y compito en CTFs como campo de marte y Hackingta. Documento cada resolución en mis writeups.",
   "hero.about.2": "Busco mi primera práctica en pentesting.",

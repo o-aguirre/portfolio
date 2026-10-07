@@ -2,7 +2,7 @@
 const en = {
   "meta.title": "Onésimo Aguirre — Security Portfolio",
   "nav.contact": "./contact",
-  "lang.switchTo": "Switch language to Español",
+  "lang.label": "Language",
   "hero.title": "Hi! I'm mephibosheth",
   "hero.about.1": "Computer Engineering student at Duoc UC, focused on offensive security. I come from software development, so I understand how the applications I am now learning to break are built. I solve machines on HackTheBox and DockerLabs, and compete in CTFs such as campo de marte and Hackingta. I document every solution in my writeups.",
   "hero.about.2": "I am looking for my first internship in pentesting.",
