@@ -1,4 +1,4 @@
-import { partitionEntries } from './contentEntries.js'
+import { partitionEntries, isText } from './contentEntries.js'
 
 const KINDS =['track', 'seminar', 'ctf', 'cert', 'milestone']
 const DATE = /^\d{4}-(0[1-9]|1[0-2])$/
@@ -17,7 +17,7 @@ export function fakeHash(id) {
 function validate(entry) {
   if (typeof entry.date !== 'string' || !DATE.test(entry.date)) return 'date must be YYYY-MM'
   if (!KINDS.includes(entry.kind)) return `unknown kind "${entry.kind}"`
-  if (!entry.text?.en || !entry.text?.es) return 'text needs both en and es'
+  if (!isText(entry.text?.en) || !isText(entry.text?.es)) return 'text needs both en and es as text'
   return null
 }
 

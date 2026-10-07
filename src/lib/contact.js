@@ -1,18 +1,18 @@
-import { partitionEntries } from './contentEntries.js'
+import { partitionEntries, isText, isOptionalHttpsUrl } from './contentEntries.js'
 
 function validate(entry) {
-  if (!entry.label) return 'missing label'
-  if (entry.href !== undefined && !(typeof entry.href === 'string' && entry.href.startsWith('https://'))) {
-    return 'href must start with https://'
-  }
+  if (!isText(entry.label)) return 'label must be text'
+  if (!isText(entry.value)) return 'value must be text'
+  if (!isOptionalHttpsUrl(entry.href)) return 'href must start with https://'
   return null
 }
 
-// Entries with an empty value are placeholders the owner has not filled yet:
-// they are hidden silently. Invalid entries are skipped and reported in
-// `errors` so bad data never blanks the page.
+const isPlaceholder = (entry) =>
+  entry !== null && typeof entry === 'object' && typeof entry.value === 'string' && entry.value.trim() === ''
+
+// Entries with an empty (or whitespace-only) value are placeholders the owner
+// has not filled yet: they are hidden silently. Invalid entries are skipped
+// and reported in `errors` so bad data never blanks the page.
 export function prepareContact(entries) {
-  const filled = entries.filter((entry) => entry === null || typeof entry !== 'object' || entry.value !== '')
-  const { items, errors } = partitionEntries(filled, (entry) => (entry.value ? validate(entry) : 'missing value'))
-  return { items, errors }
+  return partitionEntries(entries.filter((entry) => !isPlaceholder(entry)), validate)
 }

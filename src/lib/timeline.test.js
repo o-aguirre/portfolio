@@ -27,6 +27,15 @@ describe('prepareTimeline', () => {
     expect(errorIds([entry({ id: 'k', kind: 'party' })])).toEqual(['k'])
   })
 
+  it('requires both texts to be strings', () => {
+    expect(
+      errorIds([
+        entry({ id: 'o', text: { en: { x: 1 }, es: 'ok' } }),
+        entry({ id: 'p', text: { en: 'ok', es: ['no'] } }),
+      ]),
+    ).toEqual(['o', 'p'])
+  })
+
   it('requires both languages', () => {
     expect(
       errorIds([entry({ id: 'l', text: { en: 'only' } }), entry({ id: 'm', text: undefined })]),

@@ -1,11 +1,14 @@
-import { partitionEntries } from './contentEntries.js'
+import { partitionEntries, isText, isOptionalText, isOptionalHttpsUrl } from './contentEntries.js'
 
 const STATUSES = ['earned', 'in-progress']
 
 function validate(cert) {
-  if (!cert.name) return 'missing name'
+  if (!isText(cert.name)) return 'missing name'
   if (!cert.status) return 'missing status'
   if (!STATUSES.includes(cert.status)) return `unknown status "${cert.status}"`
+  if (!isOptionalText(cert.issuer)) return 'issuer must be text'
+  if (!isOptionalText(cert.year)) return 'year must be text or a number'
+  if (!isOptionalHttpsUrl(cert.url)) return 'url must start with https://'
   return null
 }
 

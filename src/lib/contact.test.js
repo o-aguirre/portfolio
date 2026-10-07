@@ -28,6 +28,22 @@ describe('prepareContact', () => {
     expect(errors.map((e) => e.id)).toEqual(['a', 'b', 'c'])
   })
 
+  it('skips entries whose label or value is not text', () => {
+    const { items, errors } = prepareContact([
+      ok({ id: 'a', value: { en: 'x', es: 'y' } }),
+      ok({ id: 'b', label: { en: 'x' } }),
+      ok({ id: 'good' }),
+    ])
+    expect(items.map((e) => e.id)).toEqual(['good'])
+    expect(errors.map((e) => e.id)).toEqual(['a', 'b'])
+  })
+
+  it('treats a whitespace-only value as an unfilled placeholder', () => {
+    const { items, errors } = prepareContact([ok({ id: 'blank', value: '   ' }), ok({ id: 'good' })])
+    expect(items.map((e) => e.id)).toEqual(['good'])
+    expect(errors).toEqual([])
+  })
+
   it('does not throw on malformed input', () => {
     const { items, errors } = prepareContact([null, { id: 'x', label: 'x', value: 'y' }])
     expect(items).toHaveLength(1)

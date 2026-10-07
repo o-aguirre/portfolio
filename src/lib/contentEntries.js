@@ -1,3 +1,12 @@
+// Field checks for owner content. Rendered fields must be plain text: an
+// object reaching JSX as a child makes React throw and blanks the page.
+export const isText = (value) => typeof value === 'string' && value.trim() !== ''
+export const isOptionalText = (value) =>
+  value === undefined || isText(value) || Number.isFinite(value)
+// Only https links are allowed, which also rules out `javascript:` URLs.
+export const isOptionalHttpsUrl = (value) =>
+  value === undefined || (typeof value === 'string' && value.startsWith('https://'))
+
 // Splits owner-provided entries into valid items and reported errors.
 // Every entry must be an object with a unique, non-empty string id (used as
 // the React key); `validate` adds the content-specific checks and returns an
