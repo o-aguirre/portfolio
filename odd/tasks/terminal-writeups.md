@@ -27,7 +27,7 @@ Reposition the portfolio as a cybersecurity portfolio: terminal visual identity 
 |---|---|---|---|---|
 | 1 | `feature/terminal-writeups` | T1–T4 | `main` | `014b0e8`..this doc commit (367 authored lines before it) |
 | 2 | `feature/terminal-writeups-ui` | T5–T6 | slice 1 | `4e2d437`, `998012d`, `4f8fc01` |
-| 3 | `feature/terminal-writeups-restyle` | T7–T8 | slice 2 | `accaebc`, `014e39d`, `d58d7c9` |
+| 3 | `feature/terminal-writeups-restyle` | T7–T8c | slice 2 | `accaebc`, `014e39d`, `d58d7c9`, `8715151` |
 
 ## Checklist
 - [x] T1 — Unblock build: rename `projects.jsx` → `Projects.jsx`. Route: inline (1 file). Evidence: `npm run build` ✓, commit `014b0e8`.
@@ -41,6 +41,7 @@ Reposition the portfolio as a cybersecurity portfolio: terminal visual identity 
 - [x] T7 — Restyle Hero/Navbar/Footer/Skills/Contact/App/index.html; fix a11y defects in touched lines. Route: delegated. Evidence: RED (6 new tests failed: two h1, alt, rel, nesting, CV link, Skills h2) → GREEN 35/35; `npm test`, `npm run lint`, `npm run build` exit 0; forbidden-class `rg` and `target="_blank"` without `rel=` checks empty; built `index.html` has new title, description and working favicon path; commit `accaebc`. Pending: owner visual pass at 360/768/1440.
 - [x] T8 — Fastfetch hero replaces photo ("hello, friend." hexdump, ASCII hidden on mobile, profile data in src/data/profile.js). Route: delegated. Evidence: RED (hexdump and Fastfetch suites failed, modules missing) -> GREEN 42/43 tests (1 failure in `navigation.test.jsx` caused by the owner's uncommitted Hero h1 change to "mephibosheth", pre-existing, not T8); `npm run lint`, `npm run build` exit 0; `rg 'o-aguirre.jpg' src` empty; commit `014e39d`. Pending: owner fills real values in `src/data/profile.js`; navigation test expects `/Onésimo/` h1.
 - [x] T8b — Hero layout fix (single terminal window, fastfetch grid, hexdump from lg) + owner copy markup; note: owner's copy edit landed inside 014e39d. Route: delegated. Evidence: `npm test` 44/44 (10 files), `npm run lint` and `npm run build` exit 0; `rg 'react-typed|ReactTyped' src package.json` empty (dependency uninstalled); navigation test no longer depends on the h1 wording; new test asserts 3 about paragraphs; commit `d58d7c9`. Pending: owner visual pass at ~1720px.
+- [x] T8c — hexdump moved to `$ xxd hello.txt` (first command, hidden on mobile); fastfetch runs with --logo none (owner choice). Route: delegated. Evidence: RED (3 tests failed: xxd block, `--logo none` prompt, no pre in Fastfetch) -> GREEN `npm test` 46/46 (10 files), `npm run lint` and `npm run build` exit 0; gga hook passed; commit `8715151`.
 
 ## Acceptance criteria
 - `npm test`, `npm run lint`, `npm run build` green.
