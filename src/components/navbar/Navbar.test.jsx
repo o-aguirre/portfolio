@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
-import { describe, it, expect, afterEach } from 'vitest'
-import { render, screen, cleanup } from '@testing-library/react'
+import { describe, it, expect, afterEach, vi } from 'vitest'
+import { render, screen, cleanup, fireEvent } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import { LanguageProvider } from '../../i18n/LanguageProvider'
 import Navbar from './Navbar'
@@ -28,6 +28,29 @@ describe('Navbar', () => {
     renderNavbar()
     const nav = screen.getByRole('navigation', { name: 'Primary' })
     expect(nav.textContent).toContain('./contact')
+  })
+
+  it('shows only ./writeups, ./about and ./contact as section links', () => {
+    renderNavbar()
+    const nav = screen.getByRole('navigation', { name: 'Primary' })
+    expect(nav.textContent).toContain('./writeups')
+    expect(nav.textContent).toContain('./about')
+    expect(nav.textContent).not.toMatch(/\.\/(home|skills|certs|log)/)
+  })
+
+  it('uses the brand as the link back to the top of the page', () => {
+    const scrollIntoView = vi.fn()
+    render(
+      <MemoryRouter>
+        <LanguageProvider initialLang="en">
+          <div id="home" />
+          <Navbar />
+        </LanguageProvider>
+      </MemoryRouter>,
+    )
+    document.getElementById('home').scrollIntoView = scrollIntoView
+    fireEvent.click(screen.getByRole('button', { name: /o-aguirre@portfolio/ }))
+    expect(scrollIntoView).toHaveBeenCalled()
   })
 
   it('renders the language toggle instead of the contact button', () => {

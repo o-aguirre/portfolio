@@ -2,7 +2,6 @@
 import { describe, it, expect, afterEach } from 'vitest'
 import { screen, cleanup } from '@testing-library/react'
 import Certs from './Certs'
-import Navbar from '../navbar/Navbar'
 import { renderWithProviders } from '../../test/renderWithProviders'
 
 afterEach(cleanup)
@@ -49,15 +48,5 @@ describe('Certs', () => {
   it('renders nothing when the list is empty', () => {
     const { container } = renderWithProviders(<Certs items={[]} />)
     expect(container.querySelector('#certs')).toBeNull()
-  })
-})
-
-describe('Navbar certs item', () => {
-  it('hides ./certs when the list is empty and shows it otherwise', () => {
-    renderWithProviders(<Navbar sections={{ certs: [], timeline: [] }} />)
-    expect(screen.queryByText('./certs')).toBeNull()
-    cleanup()
-    renderWithProviders(<Navbar sections={{ certs: items, timeline: [] }} />)
-    expect(screen.getByText('./certs')).toBeTruthy()
   })
 })
