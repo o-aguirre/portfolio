@@ -10,6 +10,8 @@ const en = {
   "link.linkedin": "LinkedIn profile",
   "skills.count.one": "1 writeup",
   "skills.count.other": "{n} writeups",
+  "certs.status.earned": "earned",
+  "certs.status.in-progress": "in-progress",
   "contact.email": "email:",
   "contact.message": "message:",
   "contact.placeholder": "Leave a comment...",

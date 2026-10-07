@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom'
 import Hero from '../components/hero/Hero'
 import WriteupsSection from '../features/writeups/WriteupsSection'
 import Skills from '../components/skills/Skills'
+import Certs from '../components/certs/Certs'
 import Contact from '../components/contact/Contact'
 import Footer from '../components/footer/Footer'
 import { scrollToSection } from '../lib/scrollToSection'
@@ -26,6 +27,7 @@ const HomePage = () => {
             <Hero />
             <WriteupsSection />
             <Skills />
+            <Certs />
             <Contact />
             <Footer />
         </>
