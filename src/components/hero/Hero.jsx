@@ -1,6 +1,5 @@
 import Navbar from "./../navbar/Navbar";
 import CV from './../../assets/CV.pdf'
-import { ReactTyped } from "react-typed";
 import Fastfetch from "./Fastfetch";
 
 const linkClass = "text-ansi-cyan hover:text-ansi-green focus-visible:outline-2 focus-visible:outline-ansi-green transition-colors"
@@ -17,8 +16,8 @@ const Hero = () => {
 
             <Navbar />
             <section data-aos="fade-up" data-aos-delay="250" className="text-ansi-fg z-10 pt-10">
-                <div className="container mx-auto flex px-5 py-16 md:flex-row flex-col items-center gap-10">
-                    <div className="w-full md:w-3/5 bg-ansi-surface border border-ansi-raised rounded-md shadow-[0_0_30px_rgba(0,179,104,0.08)]">
+                <div className="container mx-auto px-5 py-16">
+                    <div className="w-full max-w-4xl mx-auto bg-ansi-surface border border-ansi-raised rounded-md shadow-[0_0_30px_rgba(0,179,104,0.08)]">
                         <div className="flex items-center gap-2 px-4 py-2 bg-ansi-raised">
                             <span className="size-3 rounded-full bg-ansi-red" aria-hidden="true" />
                             <span className="size-3 rounded-full bg-ansi-amber" aria-hidden="true" />
@@ -29,12 +28,16 @@ const Hero = () => {
                             <Prompt>whoami</Prompt>
                             <h1 className="text-3xl font-bold text-ansi-green break-words">Hi! I'm mephibosheth</h1>
 
+                            <Prompt>fastfetch</Prompt>
+                            <Fastfetch />
+
                             <Prompt>cat about.txt</Prompt>
-                            <p className="leading-relaxed text-ansi-fg break-words">Estudiante de Ingeniería Informática apasionado por la ciberseguridad. Durante mi formación he trabajado con diversos lenguajes de programación, diseño de aplicaciones e integración de IA, lo que me ha dado una visión profunda de cómo funcionan los sistemas por dentro.
+                            <div className="space-y-3">
+                                <p className="leading-relaxed text-ansi-fg break-words">Estudiante de Ingeniería Informática apasionado por la ciberseguridad. Durante mi formación he trabajado con diversos lenguajes de programación, diseño de aplicaciones e integración de IA, lo que me ha dado una visión profunda de cómo funcionan los sistemas por dentro.</p>
+                                <p className="leading-relaxed text-ansi-fg break-words">Descubrí mi verdadera vocación en la ciberseguridad y he volcado mi enfoque en dominar esta disciplina. Participo activamente en los tracks de formación de Duoc UC y compito en cada CTF que puedo, conectando con la comunidad y reforzando mis conocimientos técnicos en entornos prácticos.</p>
+                                <p className="leading-relaxed text-ansi-fg break-words">En constante evolución y aprendizaje, con el objetivo firme de convertirme en un profesional integral.</p>
+                            </div>
 
-                            Descubrí mi verdadera vocación en la ciberseguridad y he volcado mi enfoque en dominar esta disciplina. Participo activamente en los tracks de formación de Duoc UC y compito en cada CTF que puedo, conectando con la comunidad y reforzando mis conocimientos técnicos en entornos prácticos.
-
-                            En constante evolución y aprendizaje, con el objetivo firme de convertirme en un profesional integral.</p>
                             <Prompt>ls links/</Prompt>
                             <p className="flex flex-wrap gap-x-4 gap-y-1">
                                 <a href="https://github.com/o-aguirre" target="_blank" rel="noreferrer" aria-label="GitHub profile" className={linkClass}>[github]</a>
@@ -50,10 +53,6 @@ const Hero = () => {
                                 </a>
                             </Prompt>
                         </div>
-                    </div>
-                    <div className="md:w-2/5 w-full min-w-0 space-y-3">
-                        <Prompt>fastfetch</Prompt>
-                        <Fastfetch />
                     </div>
                 </div>
             </section>

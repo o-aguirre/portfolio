@@ -45,4 +45,17 @@ describe('Hero', () => {
     )
     expect(container.querySelectorAll('img')).toHaveLength(0)
   })
+
+  it('renders the about text as three paragraphs', () => {
+    const { container } = render(
+      <MemoryRouter>
+        <Hero />
+      </MemoryRouter>,
+    )
+    const prompt = [...container.querySelectorAll('p')].find((p) =>
+      p.textContent.includes('cat about.txt'),
+    )
+    const paragraphs = prompt.nextElementSibling.querySelectorAll('p')
+    expect(paragraphs).toHaveLength(3)
+  })
 })

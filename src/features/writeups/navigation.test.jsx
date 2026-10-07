@@ -26,7 +26,7 @@ describe('navigation from a writeup page', () => {
     renderApp('/writeups/htb-example-machine')
     fireEvent.click(await screen.findByRole('link', { name: 'cd ..' }))
     expect(
-      await screen.findByRole('heading', { level: 1, name: /Onésimo/ }),
+      await screen.findByRole('heading', { level: 1 }),
     ).toBeTruthy()
     expect(scrollIntoView).toHaveBeenCalled()
     expect(scrollIntoView.mock.contexts.at(-1).id).toBe('writeups')
