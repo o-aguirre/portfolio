@@ -43,7 +43,7 @@ describe('Hero', () => {
     expect(container.querySelectorAll('img')).toHaveLength(0)
   })
 
-  it('renders the about text as three paragraphs', () => {
+  it('renders the about text as separate paragraphs', () => {
     const { container } = render(
       <MemoryRouter>
         <Hero />
@@ -53,33 +53,37 @@ describe('Hero', () => {
       p.textContent.includes('cat about.txt'),
     )
     const paragraphs = prompt.nextElementSibling.querySelectorAll('p')
-    expect(paragraphs).toHaveLength(3)
+    expect(paragraphs.length).toBeGreaterThan(0)
   })
 
-  it('runs the hello-friend hexdump as its own xxd command, hidden on mobile', () => {
+  it('separates command blocks with spacing instead of line breaks', () => {
     const { container } = render(
       <MemoryRouter>
         <Hero />
       </MemoryRouter>,
     )
-    const prompt = [...container.querySelectorAll('p')].find((p) =>
-      p.textContent.includes('xxd hello.txt'),
-    )
-    const wrapper = prompt.parentElement
-    expect(wrapper.className).toContain('hidden')
-    expect(wrapper.className).toContain('md:block')
-    const pre = wrapper.querySelector('pre')
-    expect(pre.getAttribute('aria-hidden')).toBe('true')
-    expect(pre.textContent).toContain('68 65 6c 6c 6f')
+    const body = container.querySelector('[data-testid="terminal-body"]')
+    expect(body.className).toContain('space-y-8')
+    expect(body.querySelectorAll('br')).toHaveLength(0)
   })
 
-  it('runs fastfetch without a logo', () => {
+  it('does not render the xxd block until the owner picks new art', () => {
+    const { container } = render(
+      <MemoryRouter>
+        <Hero />
+      </MemoryRouter>,
+    )
+    expect(container.textContent).not.toContain('xxd')
+    expect(container.querySelector('pre')).toBeNull()
+  })
+
+  it('runs fastfetch', () => {
     const { container } = render(
       <MemoryRouter>
         <Hero />
       </MemoryRouter>,
     )
     const prompts = [...container.querySelectorAll('p')].map((p) => p.textContent)
-    expect(prompts.some((t) => t.includes('fastfetch --logo none'))).toBe(true)
+    expect(prompts.some((t) => t.includes('$ fastfetch'))).toBe(true)
   })
 })

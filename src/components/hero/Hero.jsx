@@ -1,9 +1,6 @@
 import Navbar from "./../navbar/Navbar";
 import CV from './../../assets/CV.pdf'
 import Fastfetch from "./Fastfetch";
-import { toHexdump } from "../../lib/hexdump";
-
-const hello = toHexdump('hello, friend.').join('\n')
 
 const linkClass = "text-ansi-cyan hover:text-ansi-green focus-visible:outline-2 focus-visible:outline-ansi-green transition-colors"
 
@@ -27,39 +24,41 @@ const Hero = () => {
                             <span className="size-3 rounded-full bg-ansi-green" aria-hidden="true" />
                             <span className="ml-2 text-sm text-ansi-gray truncate">onesimo@portfolio: ~</span>
                         </div>
-                        <div className="p-5 space-y-3 text-left">
-                            <div className="hidden md:block space-y-3">
-                                <Prompt>xxd hello.txt</Prompt>
-                                <pre aria-hidden="true" className="text-sm text-ansi-green">{hello}</pre>
-                            </div>
-
-                            <Prompt>whoami</Prompt>
-                            <h1 className="text-3xl font-bold text-ansi-green break-words">Hi! I'm mephibosheth</h1>
-
-                            <Prompt>fastfetch --logo none</Prompt>
-                            <Fastfetch />
-
-                            <Prompt>cat about.txt</Prompt>
+                        <div data-testid="terminal-body" className="p-5 space-y-8 text-left">
                             <div className="space-y-3">
-                                <p className="leading-relaxed text-ansi-fg break-words">Estudiante de Ingeniería Informática apasionado por la ciberseguridad. Durante mi formación he trabajado con diversos lenguajes de programación, diseño de aplicaciones e integración de IA, lo que me ha dado una visión profunda de cómo funcionan los sistemas por dentro.</p>
-                                <p className="leading-relaxed text-ansi-fg break-words">Descubrí mi verdadera vocación en la ciberseguridad y he volcado mi enfoque en dominar esta disciplina. Participo activamente en los tracks de formación de Duoc UC y compito en cada CTF que puedo, conectando con la comunidad y reforzando mis conocimientos técnicos en entornos prácticos.</p>
-                                <p className="leading-relaxed text-ansi-fg break-words">En constante evolución y aprendizaje, con el objetivo firme de convertirme en un profesional integral.</p>
+                                <Prompt>whoami</Prompt>
+                                <h1 className="text-3xl font-bold text-ansi-green break-words">Hi! I'm mephibosheth</h1>
                             </div>
 
-                            <Prompt>ls links/</Prompt>
-                            <p className="flex flex-wrap gap-x-4 gap-y-1">
-                                <a href="https://github.com/o-aguirre" target="_blank" rel="noreferrer" aria-label="GitHub profile" className={linkClass}>[github]</a>
-                                <a href="https://www.linkedin.com/in/onesimo-aguirre/" target="_blank" rel="noreferrer" aria-label="LinkedIn profile" className={linkClass}>[linkedin]</a>
-                            </p>
-                            <Prompt>
-                                <a
-                                    href={CV}
-                                    download
-                                    className="text-ansi-amber hover:text-ansi-green focus-visible:outline-2 focus-visible:outline-ansi-green transition-colors"
-                                >
-                                    ./download_cv.sh
-                                </a>
-                            </Prompt>
+                            <div className="space-y-3">
+                                <Prompt>fastfetch</Prompt>
+                                <Fastfetch />
+                            </div>
+
+                            <div className="space-y-3">
+                                <Prompt>cat about.txt</Prompt>
+                                <div className="space-y-3">
+                                    <p className="leading-relaxed text-ansi-fg break-words">Estudiante de Ingeniería Informática en Duoc UC, enfocado en seguridad ofensiva. Vengo del desarrollo de software, así que entiendo cómo se construyen las aplicaciones que hoy aprendo a romper. Resuelvo máquinas en HackTheBox y DockerLabs, y compito en CTFs como campo de marte y Hackingta. Documento cada resolución en mis writeups.</p>
+                                    <p className="leading-relaxed text-ansi-fg break-words">Busco mi primera práctica en pentesting.</p>
+                                </div>
+                            </div>
+
+                            <div className="space-y-3">
+                                <Prompt>ls links/</Prompt>
+                                <p className="flex flex-wrap gap-x-4 gap-y-1">
+                                    <a href="https://github.com/o-aguirre" target="_blank" rel="noreferrer" aria-label="GitHub profile" className={linkClass}>[github]</a>
+                                    <a href="https://www.linkedin.com/in/onesimo-aguirre/" target="_blank" rel="noreferrer" aria-label="LinkedIn profile" className={linkClass}>[linkedin]</a>
+                                </p>
+                                <Prompt>
+                                    <a
+                                        href={CV}
+                                        download
+                                        className="text-ansi-amber hover:text-ansi-green focus-visible:outline-2 focus-visible:outline-ansi-green transition-colors"
+                                    >
+                                        ./download_cv.sh
+                                    </a>
+                                </Prompt>
+                            </div>
                         </div>
                     </div>
                 </div>
