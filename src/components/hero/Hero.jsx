@@ -1,7 +1,7 @@
 import Navbar from "./../navbar/Navbar";
 import CV from './../../assets/CV.pdf'
-import me from './../../assets/o-aguirre.jpg'
 import { ReactTyped } from "react-typed";
+import Fastfetch from "./Fastfetch";
 
 const linkClass = "text-ansi-cyan hover:text-ansi-green focus-visible:outline-2 focus-visible:outline-ansi-green transition-colors"
 
@@ -27,23 +27,14 @@ const Hero = () => {
                         </div>
                         <div className="p-5 space-y-3 text-left">
                             <Prompt>whoami</Prompt>
-                            <h1 className="text-3xl font-bold text-ansi-green break-words">Hi! I'm Onésimo</h1>
-                            <p className="text-xl font-bold text-ansi-cyan break-words">
-                                <span className="text-ansi-green">&gt; </span>
-                                <ReactTyped
-                                    strings={[
-                                        "Full-Stack Developer",
-                                        "Continuos Learner",
-                                        "Problem Solver",
-                                        "Team Player"
-                                    ]}
-                                    typeSpeed={50}
-                                    backSpeed={30}
-                                    loop
-                                />
-                            </p>
+                            <h1 className="text-3xl font-bold text-ansi-green break-words">Hi! I'm mephibosheth</h1>
+
                             <Prompt>cat about.txt</Prompt>
-                            <p className="leading-relaxed text-ansi-fg break-words">A passionate Software Development student at DuocUC, focused on becoming a Full-Stack Developer. I specialize in building robust and dynamic solutions, connecting backend logic with Java and Spring Boot to frontend interactivity with React and JavaScript.</p>
+                            <p className="leading-relaxed text-ansi-fg break-words">Estudiante de Ingeniería Informática apasionado por la ciberseguridad. Durante mi formación he trabajado con diversos lenguajes de programación, diseño de aplicaciones e integración de IA, lo que me ha dado una visión profunda de cómo funcionan los sistemas por dentro.
+
+                            Descubrí mi verdadera vocación en la ciberseguridad y he volcado mi enfoque en dominar esta disciplina. Participo activamente en los tracks de formación de Duoc UC y compito en cada CTF que puedo, conectando con la comunidad y reforzando mis conocimientos técnicos en entornos prácticos.
+
+                            En constante evolución y aprendizaje, con el objetivo firme de convertirme en un profesional integral.</p>
                             <Prompt>ls links/</Prompt>
                             <p className="flex flex-wrap gap-x-4 gap-y-1">
                                 <a href="https://github.com/o-aguirre" target="_blank" rel="noreferrer" aria-label="GitHub profile" className={linkClass}>[github]</a>
@@ -60,12 +51,9 @@ const Hero = () => {
                             </Prompt>
                         </div>
                     </div>
-                    <div className="md:w-2/5 w-5/6 flex justify-center items-center">
-                        <img
-                            src={me}
-                            alt="Portrait of Onésimo Aguirre"
-                            className="object-cover object-center rounded-md w-72 h-72 max-w-full border border-ansi-raised shadow-[0_0_30px_rgba(0,179,104,0.15)] hover:shadow-[0_0_40px_rgba(0,179,104,0.3)] transition-shadow duration-500"
-                        />
+                    <div className="md:w-2/5 w-full min-w-0 space-y-3">
+                        <Prompt>fastfetch</Prompt>
+                        <Fastfetch />
                     </div>
                 </div>
             </section>

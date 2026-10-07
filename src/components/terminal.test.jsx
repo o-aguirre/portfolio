@@ -20,10 +20,9 @@ describe('home page terminal restyle', () => {
     expect(screen.getAllByRole('heading', { level: 1 })).toHaveLength(1)
   })
 
-  it('gives the profile image a meaningful alt', () => {
-    renderHome()
-    const img = screen.getByAltText(/Onésimo Aguirre/)
-    expect(img.getAttribute('alt').length).toBeGreaterThan(10)
+  it('renders no profile image in the hero', () => {
+    const { container } = renderHome()
+    expect(container.querySelector('#home img')).toBeNull()
   })
 
   it('adds rel=noreferrer to every target=_blank link', () => {
