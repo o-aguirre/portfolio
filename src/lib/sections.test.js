@@ -12,7 +12,7 @@ describe('getNavItems', () => {
 
   it('shows certs and log, in order, when they have entries', () => {
     const items = getNavItems({ certs: [{}], timeline: [{}] })
-    expect(targets(items)).toEqual(['home', 'writeups', 'skills', 'certs', 'log', 'contact'])
+    expect(targets(items)).toEqual(['home', 'writeups', 'skills', 'certs', 'timeline', 'contact'])
     expect(items.map((i) => i.name)).toContain('./log')
   })
 })

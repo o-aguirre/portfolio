@@ -4,6 +4,7 @@ import Hero from '../components/hero/Hero'
 import WriteupsSection from '../features/writeups/WriteupsSection'
 import Skills from '../components/skills/Skills'
 import Certs from '../components/certs/Certs'
+import Timeline from '../components/timeline/Timeline'
 import Contact from '../components/contact/Contact'
 import Footer from '../components/footer/Footer'
 import { scrollToSection } from '../lib/scrollToSection'
@@ -28,6 +29,7 @@ const HomePage = () => {
             <WriteupsSection />
             <Skills />
             <Certs />
+            <Timeline />
             <Contact />
             <Footer />
         </>
