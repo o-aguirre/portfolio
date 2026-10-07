@@ -1,10 +1,12 @@
 import { useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
+import { useLanguage } from '../../i18n/useLanguage';
 
 const Contact = () => {
+    const { t } = useLanguage();
     const form = useRef();
     const [isLoading, setIsLoading] = useState(false);
-    const [message, setMessage] = useState('');
+    const [messageKey, setMessageKey] = useState('');
 
     const sendEmail = (e) => {
         e.preventDefault();
@@ -18,13 +20,13 @@ const Contact = () => {
         )
         .then((result) => {
             console.log(result.text);
-            setMessage('Message sent successfully! ✅');
+            setMessageKey('contact.success');
             setIsLoading(false);
             form.current.reset();
         })
         .catch((error) => {
             console.log(error.text);
-            setMessage('Failed to send message. Please try again. ❌');
+            setMessageKey('contact.error');
             setIsLoading(false);
         });
     };
@@ -39,7 +41,7 @@ const Contact = () => {
                 </h2>
                 <form ref={form} onSubmit={sendEmail} className="space-y-6">
                     <div>
-                        <label htmlFor="email" className="block mb-2 text-ansi-cyan">email:</label>
+                        <label htmlFor="email" className="block mb-2 text-ansi-cyan">{t('contact.email')}</label>
                         <input
                             type="email"
                             id="email"
@@ -50,13 +52,13 @@ const Contact = () => {
                         />
                     </div>
                     <div>
-                        <label htmlFor="message" className="block mb-2 text-ansi-cyan">message:</label>
+                        <label htmlFor="message" className="block mb-2 text-ansi-cyan">{t('contact.message')}</label>
                         <textarea
                             rows='6'
                             id="message"
                             name="message"
                             className={fieldClass}
-                            placeholder="Leave a comment..."
+                            placeholder={t('contact.placeholder')}
                             required
                         />
                     </div>
@@ -65,9 +67,9 @@ const Contact = () => {
                         disabled={isLoading}
                         className="inline-flex text-ansi-green border border-ansi-green hover:bg-ansi-green hover:text-ansi-bg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ansi-green py-2 px-6 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                        {isLoading ? 'sending...' : './send.sh'}
+                        {isLoading ? t('contact.sending') : './send.sh'}
                     </button>
-                    {message && <p role="status" className="text-ansi-amber mt-4 break-words">{message}</p>}
+                    {messageKey && <p role="status" className="text-ansi-amber mt-4 break-words">{t(messageKey)}</p>}
                 </form>
             </div>
         </section>

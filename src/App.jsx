@@ -4,14 +4,17 @@ import AOS from 'aos'
 import 'aos/dist/aos.css'
 import './App.css'
 import HomePage from './pages/HomePage'
+import { useLanguage } from './i18n/useLanguage'
 
 const WriteupPage = lazy(() => import('./features/writeups/WriteupPage'))
 
-const NotFound = () => (
-    <p className="font-mono text-ansi-red p-5">bash: command not found (404)</p>
-)
+const NotFound = () => {
+    const { t } = useLanguage()
+    return <p className="font-mono text-ansi-red p-5">{t('app.notFound')}</p>
+}
 
 const App = () => {
+    const { t } = useLanguage()
 
     useEffect(() => {
         AOS.init({
@@ -21,7 +24,7 @@ const App = () => {
 
     return(
         <main className='bg-ansi-bg'>
-            <Suspense fallback={<p className="font-mono text-ansi-gray p-5">loading...</p>}>
+            <Suspense fallback={<p className="font-mono text-ansi-gray p-5">{t('app.loading')}</p>}>
                 <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/writeups/:slug" element={<WriteupPage />} />

@@ -3,8 +3,10 @@ import tailwindcssIcon from './../../assets/tailwind-css.png'
 import reactIcon from './../../assets/react.png'
 import springIcon from './../../assets/spring-boot.png'
 import gitIcon from './../../assets/git.png'
+import { useLanguage } from '../../i18n/useLanguage'
 
 const Skills = () => {
+    const { t } = useLanguage()
 
     const skills = [
         { name: 'JavaScript', icon: jsIcon },
@@ -21,9 +23,7 @@ const Skills = () => {
                     <h2 data-aos="fade-right" data-aos-delay="500" className="text-2xl sm:text-3xl font-bold mb-4 break-words">
                         <span className="text-ansi-green">$</span> ls skills/
                     </h2>
-                    <p data-aos="fade-right" data-aos-delay="500" className="leading-relaxed text-base text-ansi-gray">My name is Onésimo Aguirre, and I am currently a Software Development student at DuocUC. Although I don't have professional experience yet, I have dedicated my studies to building a solid foundation in full-stack development.
-                        I enjoy creating both robust server-side logic with Java and Spring Boot, as well as modern, interactive user interfaces with React. My knowledge of SQL allows me to manage data efficiently, and I use Git as a fundamental tool for an organized and collaborative workflow.
-                        I am actively seeking an opportunity to apply my skills, learn from an experienced team, and contribute to challenging projects..</p>
+                    <p data-aos="fade-right" data-aos-delay="500" className="leading-relaxed text-base text-ansi-gray">{t('skills.about')}</p>
                 </div>
                 <div data-aos="fade-left" data-aos-delay="500" className="md:w-1/2 md:pl-12">
                     <ul className="flex flex-wrap gap-4 justify-center md:justify-start">

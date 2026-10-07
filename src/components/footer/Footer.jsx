@@ -1,6 +1,9 @@
+import { useLanguage } from '../../i18n/useLanguage'
+
 const linkClass = "text-ansi-cyan hover:text-ansi-green focus-visible:outline-2 focus-visible:outline-ansi-green transition-colors"
 
 const Footer = () => {
+    const { t } = useLanguage()
     const year = new Date().getFullYear()
 
     return (
@@ -9,8 +12,8 @@ const Footer = () => {
                 <span className="text-ansi-gray text-center break-words">
                     [exit 0] &copy; {year} o-aguirre
                 </span>
-                <a href="https://github.com/o-aguirre" target="_blank" rel="noreferrer" aria-label="GitHub profile" className={linkClass}>[github]</a>
-                <a href="https://www.linkedin.com/in/onesimo-aguirre/" target="_blank" rel="noreferrer" aria-label="LinkedIn profile" className={linkClass}>[linkedin]</a>
+                <a href="https://github.com/o-aguirre" target="_blank" rel="noreferrer" aria-label={t('link.github')} className={linkClass}>[github]</a>
+                <a href="https://www.linkedin.com/in/onesimo-aguirre/" target="_blank" rel="noreferrer" aria-label={t('link.linkedin')} className={linkClass}>[linkedin]</a>
             </div>
         </footer>
     )

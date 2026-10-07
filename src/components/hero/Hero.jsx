@@ -1,6 +1,7 @@
 import Navbar from "./../navbar/Navbar";
 import CV from './../../assets/CV.pdf'
 import Fastfetch from "./Fastfetch";
+import { useLanguage } from "../../i18n/useLanguage";
 
 const linkClass = "text-ansi-cyan hover:text-ansi-green focus-visible:outline-2 focus-visible:outline-ansi-green transition-colors"
 
@@ -11,6 +12,8 @@ const Prompt = ({ children }) => (
 )
 
 const Hero = () => {
+    const { t } = useLanguage()
+
     return (
         <div id="home" className="relative overflow-hidden min-h-[550px] sm:min-h-[660px] flex flex-col font-mono">
 
@@ -27,7 +30,7 @@ const Hero = () => {
                         <div data-testid="terminal-body" className="p-5 space-y-8 text-left">
                             <div className="space-y-3">
                                 <Prompt>whoami</Prompt>
-                                <h1 className="text-3xl font-bold text-ansi-green break-words">Hi! I'm mephibosheth</h1>
+                                <h1 className="text-3xl font-bold text-ansi-green break-words">{t('hero.title')}</h1>
                             </div>
 
                             <div className="space-y-3">
@@ -38,16 +41,16 @@ const Hero = () => {
                             <div className="space-y-3">
                                 <Prompt>cat about.txt</Prompt>
                                 <div className="space-y-3">
-                                    <p className="leading-relaxed text-ansi-fg break-words">Estudiante de Ingeniería Informática en Duoc UC, enfocado en seguridad ofensiva. Vengo del desarrollo de software, así que entiendo cómo se construyen las aplicaciones que hoy aprendo a romper. Resuelvo máquinas en HackTheBox y DockerLabs, y compito en CTFs como campo de marte y Hackingta. Documento cada resolución en mis writeups.</p>
-                                    <p className="leading-relaxed text-ansi-fg break-words">Busco mi primera práctica en pentesting.</p>
+                                    <p className="leading-relaxed text-ansi-fg break-words">{t('hero.about.1')}</p>
+                                    <p className="leading-relaxed text-ansi-fg break-words">{t('hero.about.2')}</p>
                                 </div>
                             </div>
 
                             <div className="space-y-3">
                                 <Prompt>ls links/</Prompt>
                                 <p className="flex flex-wrap gap-x-4 gap-y-1">
-                                    <a href="https://github.com/o-aguirre" target="_blank" rel="noreferrer" aria-label="GitHub profile" className={linkClass}>[github]</a>
-                                    <a href="https://www.linkedin.com/in/onesimo-aguirre/" target="_blank" rel="noreferrer" aria-label="LinkedIn profile" className={linkClass}>[linkedin]</a>
+                                    <a href="https://github.com/o-aguirre" target="_blank" rel="noreferrer" aria-label={t('link.github')} className={linkClass}>[github]</a>
+                                    <a href="https://www.linkedin.com/in/onesimo-aguirre/" target="_blank" rel="noreferrer" aria-label={t('link.linkedin')} className={linkClass}>[linkedin]</a>
                                 </p>
                                 <Prompt>
                                     <a

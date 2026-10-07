@@ -1,18 +1,18 @@
 // @vitest-environment jsdom
 import { describe, it, expect, afterEach } from 'vitest'
-import { render, screen, cleanup } from '@testing-library/react'
-import { MemoryRouter, Routes, Route } from 'react-router-dom'
+import { screen, cleanup } from '@testing-library/react'
+import { Routes, Route } from 'react-router-dom'
+import { renderWithProviders } from '../../test/renderWithProviders'
 import WriteupPage from './WriteupPage'
 
 afterEach(cleanup)
 
 const renderAt = (path) =>
-  render(
-    <MemoryRouter initialEntries={[path]}>
-      <Routes>
-        <Route path="/writeups/:slug" element={<WriteupPage />} />
-      </Routes>
-    </MemoryRouter>,
+  renderWithProviders(
+    <Routes>
+      <Route path="/writeups/:slug" element={<WriteupPage />} />
+    </Routes>,
+    { route: path },
   )
 
 describe('WriteupPage', () => {
