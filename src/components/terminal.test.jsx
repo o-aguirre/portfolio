@@ -1,18 +1,14 @@
 // @vitest-environment jsdom
 import { describe, it, expect, afterEach } from 'vitest'
-import { render, screen, cleanup } from '@testing-library/react'
-import { MemoryRouter } from 'react-router-dom'
+import { screen, cleanup } from '@testing-library/react'
 import HomePage from '../pages/HomePage'
 import Skills from './skills/Skills'
+import { renderWithProviders } from '../test/renderWithProviders'
 
 afterEach(cleanup)
 
 const renderHome = () =>
-  render(
-    <MemoryRouter initialEntries={['/']}>
-      <HomePage />
-    </MemoryRouter>,
-  )
+  renderWithProviders(<HomePage />)
 
 describe('home page terminal restyle', () => {
   it('renders a single h1', () => {
@@ -46,7 +42,7 @@ describe('home page terminal restyle', () => {
 
 describe('Skills', () => {
   it('uses an h2 section heading', () => {
-    render(<Skills />)
+    renderWithProviders(<Skills />)
     expect(screen.getByRole('heading', { level: 2, name: /skills/ })).toBeTruthy()
     expect(screen.queryAllByRole('heading', { level: 1 })).toHaveLength(0)
   })
