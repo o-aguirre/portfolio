@@ -33,7 +33,7 @@ Reposition the portfolio as a cybersecurity portfolio: terminal visual identity 
 | 5a | `feature/terminal-writeups-skills` | T14 | slice 4b | `6ff4d97` (256 authored lines) |
 | 5b | `feature/terminal-writeups-certs-log` | T15–T16 | slice 5a | `2014ed2`, `b324d00`, `fb587c2` (420 authored lines) |
 | 5c | `feature/terminal-writeups-sections` | T17, T17b, skills data | slice 5b | `811e029`, `d2ac732`, `6bd01cd` (split from slice 5: 676 lines exceeded the ~400 budget) |
-| 6 | `feature/terminal-writeups-contact` | T18 | slice 5c | — |
+| 6 | `feature/terminal-writeups-contact` | T18 | slice 5c | `9c0ab92` |
 
 ## Checklist
 - [x] T1 — Unblock build: rename `projects.jsx` → `Projects.jsx`. Route: inline (1 file). Evidence: `npm run build` ✓, commit `014b0e8`.
@@ -77,7 +77,7 @@ Reposition the portfolio as a cybersecurity portfolio: terminal visual identity 
 - Review T14–T17 (`1705b72..811e029`): medium, consent granted, review-reliability → approved, acknowledged (lineage `review-da83feb70ad322e8`). Reviewed boundary: `811e029`. Fixed right after (T17b): R3-001 entry without id crashed `fakeHash` (page blank); R3-002 missing/duplicate ids broke React keys → shared `partitionEntries` (object + unique non-empty string id, never throws). RED 4 failing -> GREEN 129/129, lint and build exit 0.
 
 ### Slice 6 — contact (owner request)
-- [ ] T18 — Replace the EmailJS contact form with a `$ whois o-aguirre` block: channels in `src/data/contact.js` (email, github, linkedin, hackthebox, dockerlabs…; entries with empty value hidden); email stored and shown base64-encoded with a decode-and-copy button (decorative obfuscation, documented as not security); remove `@emailjs/browser` and the hardcoded IDs; update AGENTS.md rules that referenced EmailJS. Hero keeps the quick `ls links/`. Owner fills email and platform profiles (email is not published without the owner adding it).
+- [x] T18 — Evidence: Route: delegated; RED (4 suites failed: obfuscate/contact modules missing, old form/EmailJS Contact; 1 translation test failed) -> GREEN `npm test` 144/144 (26 files); `npm run lint`, `npm run build` exit 0; `rg -i emailjs src package.json AGENTS.md` empty; gga passed; commit `9c0ab92`. Replace the EmailJS contact form with a `$ whois o-aguirre` block: channels in `src/data/contact.js` (email, github, linkedin, hackthebox, dockerlabs…; entries with empty value hidden); email stored and shown base64-encoded with a decode-and-copy button (decorative obfuscation, documented as not security); remove `@emailjs/browser` and the hardcoded IDs; update AGENTS.md rules that referenced EmailJS. Hero keeps the quick `ls links/`. Owner fills email and platform profiles (email is not published without the owner adding it).
 
 Next: owner reviews English about text + visual pass in both languages; fill profile.js; owner fills certs.js, timeline.js, contact.js; removes Certs from profile.js; push/PR decision.
 
