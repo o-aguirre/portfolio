@@ -1,6 +1,7 @@
 import fm from 'front-matter'
 
-const REQUIRED = ['title', 'date', 'platform', 'summary']
+const REQUIRED = ['title', 'date', 'platform', 'summary', 'lang']
+const LANGS = ['en', 'es']
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/
 
 const fileName = (path) => path.split('/').pop()
@@ -29,6 +30,13 @@ export function parseWriteup(path, raw) {
     }
   }
 
+  const lang = String(attributes.lang)
+  if (!LANGS.includes(lang)) {
+    throw new Error(
+      `Writeup ${file}: invalid "lang" (${lang}), expected one of ${LANGS.join(', ')}`,
+    )
+  }
+
   // YAML rolls impossible dates (2025-02-31) over into a valid Date, so
   // validate the literal text when the value was written as a bare date.
   const rawDate = /^date:\s*(\S+)\s*$/m.exec(frontmatter)?.[1]
@@ -47,6 +55,7 @@ export function parseWriteup(path, raw) {
     difficulty: attributes.difficulty === undefined ? undefined : String(attributes.difficulty),
     tags: Array.isArray(attributes.tags) ? attributes.tags.map(String) : [],
     summary: String(attributes.summary),
+    lang,
     body,
   }
 }

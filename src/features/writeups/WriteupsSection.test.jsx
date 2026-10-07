@@ -13,6 +13,12 @@ describe('WriteupsSection', () => {
     expect(link.getAttribute('href')).toBe('/writeups/htb-example-machine')
   })
 
+  it('shows a language badge per row and does not filter by the UI language', () => {
+    renderWithProviders(<WriteupsSection />, { lang: 'es' })
+    expect(screen.getByText('[EN]').className).toContain('text-ansi-amber')
+    expect(screen.getByRole('link', { name: 'Example Machine' })).toBeTruthy()
+  })
+
   it('exposes the writeups section anchor', () => {
     const { container } = renderWithProviders(<WriteupsSection />)
     expect(container.querySelector('#writeups')).not.toBeNull()

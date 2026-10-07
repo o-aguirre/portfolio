@@ -19,6 +19,7 @@ const WriteupsSection = () => {
                         <li key={item.slug} className="group border-b border-ansi-raised py-4 hover:bg-ansi-surface transition-colors">
                             <div className="flex flex-col gap-1 md:flex-row md:gap-4 md:items-baseline">
                                 <span className="text-ansi-amber">{item.date}</span>
+                                <span className="text-ansi-amber">[{item.lang.toUpperCase()}]</span>
                                 <span className="text-ansi-gray">{item.platform}</span>
                                 <span className="text-ansi-gray">{item.difficulty}</span>
                                 <Link

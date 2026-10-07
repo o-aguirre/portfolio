@@ -67,7 +67,7 @@ const WriteupPage = () => {
     }
 
     return (
-        <article className="font-mono text-ansi-fg p-5 container mx-auto max-w-4xl">
+        <article lang={writeup.lang} className="font-mono text-ansi-fg p-5 container mx-auto max-w-4xl">
             <p className="mb-4">
                 <span className="text-ansi-green">onesimo@portfolio:~$</span> cat writeups/{writeup.slug}.md
             </p>

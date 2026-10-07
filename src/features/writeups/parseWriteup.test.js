@@ -9,6 +9,7 @@ const doc = (fields = {}, body = '# Hello\n\nBody text.') => {
     date: '2025-03-14',
     platform: 'HackTheBox',
     summary: 'A demo summary.',
+    lang: 'en',
     ...fields,
   }
   const lines = Object.entries(base)
@@ -27,6 +28,7 @@ describe('parseWriteup', () => {
       difficulty: 'Easy',
       tags: ['web', 'sqli'],
       summary: 'A demo summary.',
+      lang: 'en',
     })
     expect(w.body).toContain('Body text.')
   })
@@ -47,7 +49,7 @@ describe('parseWriteup', () => {
     expect(w.difficulty).toBeUndefined()
   })
 
-  it.each(['title', 'date', 'platform', 'summary'])(
+  it.each(['title', 'date', 'platform', 'summary', 'lang'])(
     'throws naming the file and field when %s is missing',
     (field) => {
       expect(() => parseWriteup(PATH, doc({ [field]: undefined }))).toThrow(
@@ -55,6 +57,14 @@ describe('parseWriteup', () => {
       )
     },
   )
+
+  it.each(['en', 'es'])('accepts lang %s', (lang) => {
+    expect(parseWriteup(PATH, doc({ lang })).lang).toBe(lang)
+  })
+
+  it.each(['fr', 'EN', 'english'])('throws on unsupported lang %s', (lang) => {
+    expect(() => parseWriteup(PATH, doc({ lang }))).toThrow(/htb-demo\.md.*lang/)
+  })
 
   it('throws on an invalid date', () => {
     expect(() => parseWriteup(PATH, doc({ date: 'not-a-date' }))).toThrow(

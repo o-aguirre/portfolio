@@ -24,6 +24,16 @@ describe('WriteupPage', () => {
     expect(document.title).toContain('Example Machine')
   })
 
+  it('sets the writeup language on the article, whatever the UI language', () => {
+    const { container } = renderWithProviders(
+      <Routes>
+        <Route path="/writeups/:slug" element={<WriteupPage />} />
+      </Routes>,
+      { lang: 'es', route: '/writeups/htb-example-machine' },
+    )
+    expect(container.querySelector('article').getAttribute('lang')).toBe('en')
+  })
+
   it('renders the markdown body', () => {
     renderAt('/writeups/htb-example-machine')
     expect(screen.getByRole('heading', { name: 'Recon' })).toBeTruthy()
