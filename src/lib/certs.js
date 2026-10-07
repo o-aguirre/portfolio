@@ -1,3 +1,5 @@
+import { partitionEntries } from './contentEntries.js'
+
 const STATUSES = ['earned', 'in-progress']
 
 function validate(cert) {
@@ -11,13 +13,7 @@ function validate(cert) {
 // blanks the page, and lists earned certifications first; relative order is
 // otherwise preserved.
 export function prepareCerts(certs) {
-  const items = []
-  const errors = []
-  for (const cert of certs) {
-    const message = validate(cert)
-    if (message) errors.push({ id: cert.id, message })
-    else items.push(cert)
-  }
+  const { items, errors } = partitionEntries(certs, validate)
   const rank = (cert) => STATUSES.indexOf(cert.status)
   return { items: items.sort((a, b) => rank(a) - rank(b)), errors }
 }

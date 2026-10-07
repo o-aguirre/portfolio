@@ -1,4 +1,6 @@
-const KINDS = ['track', 'seminar', 'ctf', 'cert', 'milestone']
+import { partitionEntries } from './contentEntries.js'
+
+const KINDS =['track', 'seminar', 'ctf', 'cert', 'milestone']
 const DATE = /^\d{4}-(0[1-9]|1[0-2])$/
 
 // Decorative only: a 7-char hex string derived from the entry id with a
@@ -22,12 +24,11 @@ function validate(entry) {
 // Skips invalid entries (reported in `errors` by id) so one bad entry never
 // blanks the page, sorts newest first and attaches the decorative `hash`.
 export function prepareTimeline(entries) {
-  const items = []
-  const errors = []
-  for (const entry of entries) {
-    const message = validate(entry)
-    if (message) errors.push({ id: entry.id, message })
-    else items.push({ ...entry, hash: fakeHash(entry.id) })
+  const { items, errors } = partitionEntries(entries, validate)
+  return {
+    items: items
+      .map((entry) => ({ ...entry, hash: fakeHash(entry.id) }))
+      .sort((a, b) => b.date.localeCompare(a.date)),
+    errors,
   }
-  return { items: items.sort((a, b) => b.date.localeCompare(a.date)), errors }
 }

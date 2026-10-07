@@ -33,6 +33,27 @@ describe('prepareTimeline', () => {
     ).toEqual(['l', 'm'])
   })
 
+  it('skips entries without a usable id instead of crashing', () => {
+    const { items, errors } = prepareTimeline([
+      entry({ id: undefined }),
+      entry({ id: '' }),
+      null,
+      entry({ id: 'good' }),
+    ])
+    expect(items.map((e) => e.id)).toEqual(['good'])
+    expect(errors).toHaveLength(3)
+  })
+
+  it('skips a duplicate id, keeping the first entry', () => {
+    const { items, errors } = prepareTimeline([
+      entry({ id: 'dup', date: '2025-01' }),
+      entry({ id: 'dup', date: '2025-02' }),
+    ])
+    expect(items).toHaveLength(1)
+    expect(items[0].date).toBe('2025-01')
+    expect(errors[0].message).toMatch(/duplicate/)
+  })
+
   it('keeps valid entries when another one is invalid', () => {
     const { items } = prepareTimeline([entry({ id: 'bad', kind: 'party' }), entry({ id: 'good' })])
     expect(items.map((e) => e.id)).toEqual(['good'])

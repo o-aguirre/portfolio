@@ -32,6 +32,18 @@ describe('prepareCerts', () => {
     expect(errors.map((e) => e.id)).toEqual(['y', 'z'])
   })
 
+  it('skips entries without a usable id instead of crashing', () => {
+    const { items, errors } = prepareCerts([ok({ id: undefined }), ok({ id: '' }), null, ok({ id: 'good' })])
+    expect(items.map((c) => c.id)).toEqual(['good'])
+    expect(errors).toHaveLength(3)
+  })
+
+  it('skips a duplicate id, keeping the first entry', () => {
+    const { items, errors } = prepareCerts([ok({ id: 'dup', name: 'first' }), ok({ id: 'dup', name: 'second' })])
+    expect(items.map((c) => c.name)).toEqual(['first'])
+    expect(errors[0].message).toMatch(/duplicate/)
+  })
+
   it('does not mutate the input', () => {
     const input = [ok({ id: 'a', status: 'in-progress' }), ok({ id: 'b' })]
     prepareCerts(input)
