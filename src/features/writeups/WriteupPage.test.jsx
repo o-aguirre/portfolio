@@ -47,6 +47,13 @@ describe('WriteupPage', () => {
     expect(screen.getByRole('link', { name: /cd \.\./ })).toBeTruthy()
   })
 
+  it('echoes slugs with replacement patterns literally in the not-found message', () => {
+    renderAt('/writeups/a$&b$$c')
+    expect(
+      screen.getByText('cat: a$&b$$c.md: No such file or directory'),
+    ).toBeTruthy()
+  })
+
   it('restores the previous document title on unmount', () => {
     document.title = 'Original title'
     const { unmount } = renderAt('/writeups/htb-example-machine')

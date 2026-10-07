@@ -68,3 +68,5 @@ Reposition the portfolio as a cybersecurity portfolio: terminal visual identity 
 Next: owner reviews English about text + visual pass in both languages; fill profile.js; push/PR decision.
 
 T13 (owner request): language switch redesigned as borderless `en / es` text buttons (one button per language, `aria-pressed`, labelled group), placed at the end of the right-aligned nav after a `│` divider. Route: inline. Evidence: RED 6 failing -> GREEN `npm test` 89/89, lint and build exit 0; gga passed; commit `4c040cc`.
+
+Review T8–T13 (`fc86d4c..1705b72`): medium, consent granted, review-reliability → approved, acknowledged (lineage `review-b6b17c34fb9c840d`). Reviewed boundary: `1705b72`. Fixed right after: R3-001 slug echoed via `replace()` interpreted `$&`/`$$` patterns (RED test with slug `a$&b$$c` → replacer function → GREEN 90/90); R3-003 `translation.test.jsx` now restores mocks. Open: R3-002 `TODO:` placeholders in `src/data/profile.js` reach production — owner must fill before release.

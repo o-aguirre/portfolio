@@ -60,7 +60,7 @@ const WriteupPage = () => {
     if (!writeup) {
         return (
             <div className="font-mono p-5 container mx-auto">
-                <p className="text-ansi-red mb-4">{t('writeup.notFound').replace('{slug}', slug)}</p>
+                <p className="text-ansi-red mb-4">{t('writeup.notFound').replace('{slug}', () => slug)}</p>
                 <BackLink />
             </div>
         )

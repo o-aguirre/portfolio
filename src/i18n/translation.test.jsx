@@ -19,7 +19,10 @@ beforeEach(() => {
   send.mockReset()
   window.localStorage.clear()
 })
-afterEach(cleanup)
+afterEach(() => {
+  cleanup()
+  vi.restoreAllMocks()
+})
 
 describe('Hero', () => {
   it('renders the English h1 and about text', () => {
