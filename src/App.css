@@ -1,4 +1,27 @@
 @import "tailwindcss";
+@import "@fontsource/jetbrains-mono/400.css";
+@import "@fontsource/jetbrains-mono/700.css";
+
+@theme {
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --color-ansi-bg: #0a0a0a;
+  --color-ansi-surface: #141414;
+  --color-ansi-raised: #1f1f1f;
+  --color-ansi-green: #00b368;
+  --color-ansi-cyan: #56b6c2;
+  --color-ansi-amber: #d19a66;
+  --color-ansi-red: #e06c75;
+  --color-ansi-gray: #8a8a8a;
+  --color-ansi-fg: #d4d4d4;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-mono);
+    background-color: var(--color-ansi-bg);
+    color: var(--color-ansi-fg);
+  }
+}
 
 html {
     scroll-behavior: smooth;

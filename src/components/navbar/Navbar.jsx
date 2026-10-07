@@ -10,7 +10,7 @@ const Navbar = () => {
     return (
         <header className="top-0 w-full z-50 bg-black border-b border-gray-800">
             <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-                <a className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+                <a className="flex font-medium items-center text-gray-900 mb-4 md:mb-0">
                     <span className="ml-3 text-3xl font-bold text-white">Portfolio <span className="text-blue-700 drop-shadow-[0_0_20px_rgba(60,39,245,0.8)]">o-aguirre</span></span>
                 </a>
                 <nav className="md:ml-auto text-white text-base md:mr-auto flex flex-wrap items-center justify-center">
