@@ -5,12 +5,11 @@ export const profile = {
   user: 'o-aguirre',
   host: 'portfolio',
   fields: [
-    { key: 'OS', value: 'TODO: your distro' },
-    { key: 'Role', value: 'TODO: your role' },
-    { key: 'Focus', value: 'TODO: your focus areas' },
-    { key: 'Platforms', value: 'TODO: CTF platforms' },
-    { key: 'Certs', value: 'TODO: certifications' },
-    { key: 'Shell', value: 'TODO: your shell' },
-    { key: 'Editor', value: 'TODO: your editor' },
+    { key: 'OS', value: 'Omarchy OS' },
+    { key: 'Role', value: 'Penetration Tester' },
+    { key: 'Focus', value: 'Web Application Security' },
+    { key: 'Platforms', value: 'Hack the Box, DockerLabs' },
+    { key: 'Shell', value: 'Kitty' },
+    { key: 'Editor', value: 'Visual Studio Code' },
   ],
 }

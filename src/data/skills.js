@@ -13,20 +13,20 @@ export const skills = [
       { name: 'gobuster', tag: 'gobuster' },
     ],
   },
-  {
-    id: 'web',
-    items: [
-      { name: 'SQL injection', tag: 'sqli' },
-      { name: 'XSS', tag: 'xss' },
-    ],
-  },
-  {
-    id: 'privesc',
-    items: [
-      { name: 'Linux privesc', tag: 'privesc' },
-      { name: 'SUID abuse', tag: 'suid' },
-    ],
-  },
+//  {
+//    id: 'web',
+//    items: [
+//      { name: 'SQL injection', tag: 'sqli' },
+//      { name: 'XSS', tag: 'xss' },
+//    ],
+//  },
+//  {
+//    id: 'privesc',
+//    items: [
+//      { name: 'Linux privesc', tag: 'privesc' },
+//      { name: 'SUID abuse', tag: 'suid' },
+//    ],
+//  },
   {
     id: 'scripting',
     items: [
