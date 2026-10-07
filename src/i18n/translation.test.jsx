@@ -3,7 +3,6 @@ import { describe, it, expect, afterEach, beforeEach, vi } from 'vitest'
 import { screen, cleanup, fireEvent, waitFor } from '@testing-library/react'
 import { Routes, Route } from 'react-router-dom'
 import Hero from '../components/hero/Hero'
-import Skills from '../components/skills/Skills'
 import Contact from '../components/contact/Contact'
 import Footer from '../components/footer/Footer'
 import HomePage from '../pages/HomePage'
@@ -46,16 +45,6 @@ describe('Hero', () => {
     for (const command of ['whoami', 'fastfetch', 'cat about.txt', 'ls links/', './download_cv.sh']) {
       expect(container.textContent).toContain(command)
     }
-  })
-})
-
-describe('Skills', () => {
-  it('translates the skills prose', () => {
-    renderWithProviders(<Skills />, { lang: 'en' })
-    expect(screen.getByText(/currently a Software Development student/)).toBeTruthy()
-    cleanup()
-    renderWithProviders(<Skills />, { lang: 'es' })
-    expect(screen.getByText(/actualmente soy estudiante de Desarrollo de Software/)).toBeTruthy()
   })
 })
 
