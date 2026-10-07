@@ -28,7 +28,8 @@ Reposition the portfolio as a cybersecurity portfolio: terminal visual identity 
 | 1 | `feature/terminal-writeups` | T1–T4 | `main` | `014b0e8`..this doc commit (367 authored lines before it) |
 | 2 | `feature/terminal-writeups-ui` | T5–T6 | slice 1 | `4e2d437`, `998012d`, `4f8fc01` |
 | 3 | `feature/terminal-writeups-restyle` | T7–T9 | slice 2 | `accaebc`, `014e39d`, `d58d7c9`, `8715151`, `9738263` |
-| 4 | `feature/terminal-writeups-i18n` | T10–T12 | slice 3 | `77bc07e`, `536c7ac`, `2a0fe35` |
+| 4a | `feature/terminal-writeups-i18n-core` | T10 | slice 3 | `77bc07e` (371 authored lines) |
+| 4b | `feature/terminal-writeups-i18n` | T11–T13 | slice 4a | `536c7ac`, `2a0fe35`, `4c040cc` (split from slice 4: 723 lines exceeded the ~400 budget) |
 
 ## Checklist
 - [x] T1 — Unblock build: rename `projects.jsx` → `Projects.jsx`. Route: inline (1 file). Evidence: `npm run build` ✓, commit `014b0e8`.
@@ -65,3 +66,5 @@ Reposition the portfolio as a cybersecurity portfolio: terminal visual identity 
 
 ## Progress / next step
 Next: owner reviews English about text + visual pass in both languages; fill profile.js; push/PR decision.
+
+T13 (owner request): language switch redesigned as borderless `en / es` text buttons (one button per language, `aria-pressed`, labelled group), placed at the end of the right-aligned nav after a `│` divider. Route: inline. Evidence: RED 6 failing -> GREEN `npm test` 89/89, lint and build exit 0; gga passed; commit `4c040cc`.
