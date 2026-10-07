@@ -2,10 +2,15 @@ import { timeline as timelineData } from '../../data/timeline'
 import { prepareTimeline } from '../../lib/timeline'
 import { useLanguage } from '../../i18n/useLanguage'
 
+// Content errors must be visible without blanking the whole site.
+for (const { id, message } of prepareTimeline(timelineData).errors) {
+    console.error(`Invalid timeline entry "${id}" in src/data/timeline.js: ${message}`)
+}
+
 const Timeline = ({ items = timelineData }) => {
     const { lang } = useLanguage()
-    if (items.length === 0) return null
-    const rows = prepareTimeline(items)
+    const rows = prepareTimeline(items).items
+    if (rows.length === 0) return null
 
     return (
         <section id="timeline" className="font-mono text-ansi-fg py-16">
