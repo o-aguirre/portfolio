@@ -27,7 +27,7 @@ Reposition the portfolio as a cybersecurity portfolio: terminal visual identity 
 |---|---|---|---|---|
 | 1 | `feature/terminal-writeups` | T1–T4 | `main` | `014b0e8`..this doc commit (367 authored lines before it) |
 | 2 | `feature/terminal-writeups-ui` | T5–T6 | slice 1 | `4e2d437`, `998012d`, `4f8fc01` |
-| 3 | `feature/terminal-writeups-restyle` | T7 | slice 2 | `accaebc` |
+| 3 | `feature/terminal-writeups-restyle` | T7–T8 | slice 2 | `accaebc`, `014e39d` |
 
 ## Checklist
 - [x] T1 — Unblock build: rename `projects.jsx` → `Projects.jsx`. Route: inline (1 file). Evidence: `npm run build` ✓, commit `014b0e8`.
@@ -39,6 +39,7 @@ Reposition the portfolio as a cybersecurity portfolio: terminal visual identity 
 - [x] T6 — Writeups UI (`ls -la` listing + markdown page with GFM + highlight); drop react-slick/slick-carousel and Projects. Route: delegated. Evidence: RED (WriteupsSection module missing; WriteupPage stub failed 3 tests) → GREEN 21/21 tests; `npm run lint`, `npm run build` exit 0; `rg 'slick|image1' src` and `rg 'dangerouslySetInnerHTML|rehype-raw' src` empty; preview `/portfolio/` HTTP 200; commit `998012d`.
 - [x] T6b — Review fixes R3-001..003 (lineage `review-d33c7d70a0e2217a`, approved+acknowledged): restore `document.title` on unmount, `createWriteupRepository` skips invalid entries and exposes `errors` (logged via `console.error` in `index.js`, AGENTS.md exception added), navigation and `NavLinkButton` tests. Route: delegated. Evidence: RED (3 failing + suite load error) → GREEN 29/29; `npm test`, `npm run lint`, `npm run build` exit 0; commit `4f8fc01`.
 - [x] T7 — Restyle Hero/Navbar/Footer/Skills/Contact/App/index.html; fix a11y defects in touched lines. Route: delegated. Evidence: RED (6 new tests failed: two h1, alt, rel, nesting, CV link, Skills h2) → GREEN 35/35; `npm test`, `npm run lint`, `npm run build` exit 0; forbidden-class `rg` and `target="_blank"` without `rel=` checks empty; built `index.html` has new title, description and working favicon path; commit `accaebc`. Pending: owner visual pass at 360/768/1440.
+- [x] T8 — Fastfetch hero replaces photo ("hello, friend." hexdump, ASCII hidden on mobile, profile data in src/data/profile.js). Route: delegated. Evidence: RED (hexdump and Fastfetch suites failed, modules missing) -> GREEN 42/43 tests (1 failure in `navigation.test.jsx` caused by the owner's uncommitted Hero h1 change to "mephibosheth", pre-existing, not T8); `npm run lint`, `npm run build` exit 0; `rg 'o-aguirre.jpg' src` empty; commit `014e39d`. Pending: owner fills real values in `src/data/profile.js`; navigation test expects `/Onésimo/` h1.
 
 ## Acceptance criteria
 - `npm test`, `npm run lint`, `npm run build` green.
@@ -56,4 +57,4 @@ Reposition the portfolio as a cybersecurity portfolio: terminal visual identity 
 - Follow-ups (SUGGESTION, non-blocking): Contact `role="status"` region should always render (screen-reader announcement); navigation tests should restore `scrollIntoView` (use `vi.spyOn` + `restoreAllMocks`); test the load-time `console.error` reporting in `writeups/index.js`.
 
 ## Progress / next step
-Next: owner visual pass at 360/768/1440 and push/PR decision.
+Next: owner fills src/data/profile.js, visual pass, push/PR decision.
