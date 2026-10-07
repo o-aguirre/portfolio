@@ -1,6 +1,9 @@
 import Navbar from "./../navbar/Navbar";
 import CV from './../../assets/CV.pdf'
 import Fastfetch from "./Fastfetch";
+import { toHexdump } from "../../lib/hexdump";
+
+const hello = toHexdump('hello, friend.').join('\n')
 
 const linkClass = "text-ansi-cyan hover:text-ansi-green focus-visible:outline-2 focus-visible:outline-ansi-green transition-colors"
 
@@ -25,10 +28,15 @@ const Hero = () => {
                             <span className="ml-2 text-sm text-ansi-gray truncate">onesimo@portfolio: ~</span>
                         </div>
                         <div className="p-5 space-y-3 text-left">
+                            <div className="hidden md:block space-y-3">
+                                <Prompt>xxd hello.txt</Prompt>
+                                <pre aria-hidden="true" className="text-sm text-ansi-green">{hello}</pre>
+                            </div>
+
                             <Prompt>whoami</Prompt>
                             <h1 className="text-3xl font-bold text-ansi-green break-words">Hi! I'm mephibosheth</h1>
 
-                            <Prompt>fastfetch</Prompt>
+                            <Prompt>fastfetch --logo none</Prompt>
                             <Fastfetch />
 
                             <Prompt>cat about.txt</Prompt>

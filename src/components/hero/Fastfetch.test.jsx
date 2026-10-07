@@ -27,12 +27,9 @@ describe('Fastfetch', () => {
     expect(screen.getByText(profile.host)).toBeTruthy()
   })
 
-  it('hides the hexdump from assistive tech and shows the bytes', () => {
+  it('does not render a hexdump logo', () => {
     const { container } = render(<Fastfetch />)
-    const pre = container.querySelector('pre')
-    expect(pre.getAttribute('aria-hidden')).toBe('true')
-    expect(pre.textContent).toContain('68 65 6c 6c 6f')
-    expect(pre.className).toContain('hidden')
+    expect(container.querySelector('pre')).toBeNull()
   })
 })
 
@@ -57,5 +54,32 @@ describe('Hero', () => {
     )
     const paragraphs = prompt.nextElementSibling.querySelectorAll('p')
     expect(paragraphs).toHaveLength(3)
+  })
+
+  it('runs the hello-friend hexdump as its own xxd command, hidden on mobile', () => {
+    const { container } = render(
+      <MemoryRouter>
+        <Hero />
+      </MemoryRouter>,
+    )
+    const prompt = [...container.querySelectorAll('p')].find((p) =>
+      p.textContent.includes('xxd hello.txt'),
+    )
+    const wrapper = prompt.parentElement
+    expect(wrapper.className).toContain('hidden')
+    expect(wrapper.className).toContain('md:block')
+    const pre = wrapper.querySelector('pre')
+    expect(pre.getAttribute('aria-hidden')).toBe('true')
+    expect(pre.textContent).toContain('68 65 6c 6c 6f')
+  })
+
+  it('runs fastfetch without a logo', () => {
+    const { container } = render(
+      <MemoryRouter>
+        <Hero />
+      </MemoryRouter>,
+    )
+    const prompts = [...container.querySelectorAll('p')].map((p) => p.textContent)
+    expect(prompts.some((t) => t.includes('fastfetch --logo none'))).toBe(true)
   })
 })
