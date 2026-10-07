@@ -25,7 +25,7 @@ afterEach(() => {
 describe('Contact (whois)', () => {
   it('renders the whois header and keeps the section id', () => {
     const { container } = renderWithProviders(<Contact entries={entries} email="" />)
-    expect(screen.getByRole('heading', { level: 2 }).textContent).toContain('whois o-aguirre')
+    expect(screen.getByRole('heading', { level: 2 }).textContent).toContain('whois mephibosheth')
     expect(container.querySelector('section#contact')).toBeTruthy()
   })
 
