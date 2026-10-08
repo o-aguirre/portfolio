@@ -1,7 +1,7 @@
 name: Deploy
 
-# Every push to main is checked and published to GitHub Pages.
-# One-time repository setting: Settings > Pages > Source: GitHub Actions.
+# Every push to main runs the CI checks and publishes dist/ to GitHub Pages.
+# Requires the repository setting Settings > Pages > Source: GitHub Actions.
 on:
   push:
     branches: [main]
@@ -9,37 +9,28 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
   group: pages
   cancel-in-progress: false
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7
-      - uses: actions/setup-node@v7
-        with:
-          node-version-file: .nvmrc
-          cache: npm
-      - run: npm ci
-      - run: npm run lint
-      - run: npm test
-      - run: npm run build
-      - uses: actions/configure-pages@v6
-      - uses: actions/upload-pages-artifact@v5
-        with:
-          path: dist
+  check:
+    uses: ./.github/workflows/ci.yml
+    with:
+      upload-pages: true
 
+  # Only this job can publish: the check job installs and runs third-party
+  # code, so it never gets the Pages or OIDC token permissions.
   deploy:
-    needs: build
+    needs: check
     runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - id: deployment
-        uses: actions/deploy-pages@v5
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1

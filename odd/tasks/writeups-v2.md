@@ -11,7 +11,7 @@ Make publishing writeups effortless and their pages compelling: automatic deploy
 ## Scope
 - In: CI (lint/test/build on Linux), Pages deploy via GitHub Actions, code-block terminal windows with copy, images from `public/writeups/<slug>/`, writing guide, writeup page header/phases/sidebar.
 - Out: serif typography (keep JetBrains Mono), translating writeups, new home-page sections.
-- Plan: `~/.claude/plans/trabajas-con-gentle-ai-glowing-token.md`.
+- Design per slice is summarized in the checklist below and in each PR description.
 
 ## Constraints
 - GitHub Pages under `/portfolio`, HashRouter. Tokens only in `src/App.css` `@theme`. EN/ES i18n with key-parity test.
@@ -43,5 +43,8 @@ Make publishing writeups effortless and their pages compelling: automatic deploy
 - Writeup page renders header, phases and sidebar at 360/768/1440 in EN/ES; one `<h1>`.
 - `npm test`, `npm run lint`, `npm run build` green.
 
+## Review (RDD)
+- V1 (`main..08b7909`): high (shell in workflows), consent granted, 4 lenses → approved, acknowledged (lineage `review-d7d8e699730925eb`). Fixed right after: Pages/OIDC permissions moved to the deploy job only; actions pinned by commit SHA; deploy reuses `ci.yml` via `workflow_call` (no drifting duplicate steps; `configure-pages` dropped, not needed for Vite); this doc's stale "Next" and out-of-repo plan link. Open: Pages source must be switched to GitHub Actions before merging (gate, owner setting).
+
 ## Progress / next step
-Next: V1.
+Next: owner switches Pages source to GitHub Actions → merge PR #16 → confirm the first Actions deploy; then V2.
