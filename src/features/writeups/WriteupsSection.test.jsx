@@ -3,6 +3,7 @@ import { describe, it, expect, afterEach } from 'vitest'
 import { screen, cleanup } from '@testing-library/react'
 import { renderWithProviders } from '../../test/renderWithProviders'
 import WriteupsSection from './WriteupsSection'
+import { writeups } from './index'
 
 afterEach(cleanup)
 
@@ -15,8 +16,12 @@ describe('WriteupsSection', () => {
 
   it('shows a language badge per row and does not filter by the UI language', () => {
     renderWithProviders(<WriteupsSection />, { lang: 'es' })
-    expect(screen.getByText('[EN]').className).toContain('text-ansi-amber')
-    expect(screen.getByRole('link', { name: 'Example Machine' })).toBeTruthy()
+    const all = writeups.list()
+    const badges = screen.getAllByText(/^\[(EN|ES)\]$/)
+    expect(badges).toHaveLength(all.length)
+    badges.forEach((badge) => expect(badge.className).toContain('text-ansi-amber'))
+    // English writeups stay listed while the UI is in Spanish.
+    all.forEach((w) => expect(screen.getByRole('link', { name: w.title })).toBeTruthy())
   })
 
   it('exposes the writeups section anchor', () => {
