@@ -15,32 +15,34 @@ const Skills = () => {
     ];
 
     return (
-        <section id="skills" className="relative overflow-hidden flex flex-col text-white">
+        <section id="skills" className="relative overflow-hidden flex flex-col font-mono text-ansi-fg">
             <div className="container flex flex-wrap px-5 py-24 mx-auto items-center">
-                <div data-aos="fade-up" data-aos-delay="200" className="md:w-1/2 md:pr-12 md:py-8 md:border-r md:border-b-0 mb-10 md:mb-0 pd-10 border-b border-gray-800">
-                    <h1 data-aos="fade-right" data-aos-delay="500" className="sm:text-4xl text-2xl font-medium mb-2 text-white">Skills</h1>
-                    <p data-aos="fade-right" data-aos-delay="500" className="leading-relaxed text-base">My name is Onésimo Aguirre, and I am currently a Software Development student at DuocUC. Although I don't have professional experience yet, I have dedicated my studies to building a solid foundation in full-stack development.
+                <div data-aos="fade-up" data-aos-delay="200" className="md:w-1/2 md:pr-12 md:py-8 md:border-r md:border-b-0 mb-10 md:mb-0 pb-10 border-b border-ansi-raised">
+                    <h2 data-aos="fade-right" data-aos-delay="500" className="text-2xl sm:text-3xl font-bold mb-4 break-words">
+                        <span className="text-ansi-green">$</span> ls skills/
+                    </h2>
+                    <p data-aos="fade-right" data-aos-delay="500" className="leading-relaxed text-base text-ansi-gray">My name is Onésimo Aguirre, and I am currently a Software Development student at DuocUC. Although I don't have professional experience yet, I have dedicated my studies to building a solid foundation in full-stack development.
                         I enjoy creating both robust server-side logic with Java and Spring Boot, as well as modern, interactive user interfaces with React. My knowledge of SQL allows me to manage data efficiently, and I use Git as a fundamental tool for an organized and collaborative workflow.
                         I am actively seeking an opportunity to apply my skills, learn from an experienced team, and contribute to challenging projects..</p>
                 </div>
                 <div data-aos="fade-left" data-aos-delay="500" className="md:w-1/2 md:pl-12">
-                    <div className="flex flex-wrap gap-4 justify-center md:justify-start">
-                        {skills.map((skill, index) => (
-                            <div
-                                key={index}
-                                className="flex items-center gap-3 px-5 py-3 bg-gray-800/50 border border-gray-800 rounded-full hover:border-blue-900 hover:bg-blue-900/20 transition-all duration-300 group"
+                    <ul className="flex flex-wrap gap-4 justify-center md:justify-start">
+                        {skills.map((skill) => (
+                            <li
+                                key={skill.name}
+                                className="flex items-center gap-3 px-4 py-3 bg-ansi-surface border border-ansi-raised hover:border-ansi-green transition-colors duration-300 group"
                             >
                                 <img
                                     src={skill.icon}
-                                    alt={skill.name}
-                                    className="w-8 h-8 object-contain group-hover:scale-110 transition-transform duration-300"
+                                    alt=""
+                                    className="w-8 h-8 object-contain"
                                 />
-                                <span className="text-sm font-medium text-gray-300 group-hover:text-blue-400 transition-colors duration-300">
+                                <span className="text-sm text-ansi-fg group-hover:text-ansi-green transition-colors duration-300">
                                     {skill.name}
                                 </span>
-                            </div>
+                            </li>
                         ))}
-                    </div>
+                    </ul>
                 </div>
             </div>
         </section>

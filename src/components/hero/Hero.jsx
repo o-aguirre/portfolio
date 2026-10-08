@@ -1,51 +1,65 @@
 import Navbar from "./../navbar/Navbar";
 import CV from './../../assets/CV.pdf'
-import me from './../../assets/o-aguirre.jpg'
-import github from './../../assets/github-icon.png'
-import linkedin from './../../assets/linkedin-icon.png'
-import { ReactTyped } from "react-typed";
+import Fastfetch from "./Fastfetch";
+
+const linkClass = "text-ansi-cyan hover:text-ansi-green focus-visible:outline-2 focus-visible:outline-ansi-green transition-colors"
+
+const Prompt = ({ children }) => (
+    <p className="text-ansi-gray break-words">
+        <span className="text-ansi-green">$</span> {children}
+    </p>
+)
 
 const Hero = () => {
     return (
-        <div id="home" className="relative overflow-hidden min-h-[550px] sm:min-h-[660px] flex flex-col">
+        <div id="home" className="relative overflow-hidden min-h-[550px] sm:min-h-[660px] flex flex-col font-mono">
 
             <Navbar />
-            <section data-aos="fade-up" data-aos-delay="250" className="text-white z-10 pt-20">
-                <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
-                    <div className="lg:grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center relative">
-                        <h1 className="sm:text-4xl text-4xl mb-4 font-bold text-white">Hi! I'm Onésimo</h1>
-                        <ReactTyped
-                            className="text-xl font-bold my-4 py-3 px-4 bg-linear-to-r from-blue-600/20 to-purple-600/20 rounded-lg inline-block"
-                            strings={[
-                                "Full-Stack Developer",
-                                "Continuos Learner",
-                                "Problem Solver",
-                                "Team Player"
-                            ]}
-                            typeSpeed={50}
-                            backSpeed={30}
-                            loop
-                        />
-                        <p className="mb-8 leading-relaxed text-gray-300 text-lg">A passionate Software Development student at DuocUC, focused on becoming a Full-Stack Developer. I specialize in building robust and dynamic solutions, connecting backend logic with Java and Spring Boot to frontend interactivity with React and JavaScript.</p>
-                        <div className="mb-8 flex flex-row items-center gap-4">
-                            <span className="text-gray-300">Social media links :</span>
-                            <a href="https://github.com/o-aguirre" target="_blank" className="inline-block size-10 hover:scale-110 transition-all duration-300">
-                                <img className="w-full h-full object-contain" src={github} alt="github icon" />
-                            </a>
-                            <a href="https://www.linkedin.com/in/onesimo-aguirre/" target="_blank" className="inline-block size-10 hover:scale-110 transition-all duration-300">
-                                <img className="w-full h-full object-contain" src={linkedin} alt="linkedin icon" />
-                            </a>
+            <section data-aos="fade-up" data-aos-delay="250" className="text-ansi-fg z-10 pt-10">
+                <div className="container mx-auto px-5 py-16">
+                    <div className="w-full max-w-4xl mx-auto bg-ansi-surface border border-ansi-raised rounded-md shadow-[0_0_30px_rgba(0,179,104,0.08)]">
+                        <div className="flex items-center gap-2 px-4 py-2 bg-ansi-raised">
+                            <span className="size-3 rounded-full bg-ansi-red" aria-hidden="true" />
+                            <span className="size-3 rounded-full bg-ansi-amber" aria-hidden="true" />
+                            <span className="size-3 rounded-full bg-ansi-green" aria-hidden="true" />
+                            <span className="ml-2 text-sm text-ansi-gray truncate">onesimo@portfolio: ~</span>
                         </div>
-                        <div className="flex justify-center">
-                            <a href={CV} download>
-                                <button className="inline-flex text-white bg-black border border-gray-800 hover:border-blue-900 py-2 px-6 focus:outline-none hover:drop-shadow-[0_0_20px_rgba(60,39,245,0.8)] hover:scale-103 rounded-full text-lg transition-all duration-300">
-                                    Download CV
-                                </button>
-                            </a>
+                        <div data-testid="terminal-body" className="p-5 space-y-8 text-left">
+                            <div className="space-y-3">
+                                <Prompt>whoami</Prompt>
+                                <h1 className="text-3xl font-bold text-ansi-green break-words">Hi! I'm mephibosheth</h1>
+                            </div>
+
+                            <div className="space-y-3">
+                                <Prompt>fastfetch</Prompt>
+                                <Fastfetch />
+                            </div>
+
+                            <div className="space-y-3">
+                                <Prompt>cat about.txt</Prompt>
+                                <div className="space-y-3">
+                                    <p className="leading-relaxed text-ansi-fg break-words">Estudiante de Ingeniería Informática en Duoc UC, enfocado en seguridad ofensiva. Vengo del desarrollo de software, así que entiendo cómo se construyen las aplicaciones que hoy aprendo a romper. Resuelvo máquinas en HackTheBox y DockerLabs, y compito en CTFs como campo de marte y Hackingta. Documento cada resolución en mis writeups.</p>
+                                    <p className="leading-relaxed text-ansi-fg break-words">Busco mi primera práctica en pentesting.</p>
+                                </div>
+                            </div>
+
+                            <div className="space-y-3">
+                                <Prompt>ls links/</Prompt>
+                                <p className="flex flex-wrap gap-x-4 gap-y-1">
+                                    <a href="https://github.com/o-aguirre" target="_blank" rel="noreferrer" aria-label="GitHub profile" className={linkClass}>[github]</a>
+                                    <a href="https://www.linkedin.com/in/onesimo-aguirre/" target="_blank" rel="noreferrer" aria-label="LinkedIn profile" className={linkClass}>[linkedin]</a>
+                                </p>
+                                <Prompt>
+                                    <a
+                                        href={CV}
+                                        download
+                                        className="text-ansi-amber hover:text-ansi-green focus-visible:outline-2 focus-visible:outline-ansi-green transition-colors"
+                                    >
+                                        ./download_cv.sh
+                                    </a>
+                                </Prompt>
+                            </div>
                         </div>
-                    </div>
-                    <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 flex justify-center items-center">
-                        <img src={me} className="object-cover object-center rounded-full w-80 h-80 border border-gray-800 drop-shadow-[0_0_40px_rgba(60,39,245,0.4)] hover:drop-shadow-[0_0_50px_rgba(60,39,245,0.6)] transition-all duration-500" />
                     </div>
                 </div>
             </section>
