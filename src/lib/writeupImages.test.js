@@ -38,6 +38,23 @@ describe('resolveImageSrc', () => {
     }
   })
 
+  it('rejects percent-encoded dot segments and malformed encodings', () => {
+    for (const src of [
+      '%2e%2e/secret.png',
+      '%2E%2E/secret.png',
+      'img/%2e%2e/%2e%2e/secret.png',
+      '.%2e/secret.png',
+      '%2e%2e%2fsecret.png',
+      'bad%E0%A4%A.png',
+    ]) {
+      expect(resolve(src)).toBeNull()
+    }
+  })
+
+  it('still accepts encoded characters that are not traversal', () => {
+    expect(resolve('nmap%20scan.png')).toBe('/portfolio/writeups/demo/nmap%20scan.png')
+  })
+
   it('rejects backslash tricks and control characters', () => {
     expect(resolve('..\\secret.png')).toBeNull()
     expect(resolve('\\\\host\\a.png')).toBeNull()

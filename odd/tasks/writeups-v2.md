@@ -46,5 +46,8 @@ Make publishing writeups effortless and their pages compelling: automatic deploy
 ## Review (RDD)
 - V1 (`main..08b7909`): high (shell in workflows), consent granted, 4 lenses → approved, acknowledged (lineage `review-d7d8e699730925eb`). Fixed right after: Pages/OIDC permissions moved to the deploy job only; actions pinned by commit SHA; deploy reuses `ci.yml` via `workflow_call` (no drifting duplicate steps; `configure-pages` dropped, not needed for Vite); this doc's stale "Next" and out-of-repo plan link. Open: Pages source must be switched to GitHub Actions before merging (gate, owner setting).
 
+- Slice 2 (`origin/main..539ecc4`): medium, consent granted, review-reliability → approved, acknowledged (lineage `review-c6bec28b3f98806c`). Fixed right after (V3b): image-only paragraphs unwrapped (no `<figure>` inside `<p>`); `%2e%2e` traversal and malformed encodings rejected; blank lines kept in prompted blocks; img component memoized per slug (test proven to fail without the memo). RED 4 → GREEN 181/181, lint and build pass.
+- Slice 2 split for review size: `feat/writeup-code-blocks` (V2, 405 lines) and `feat/writeup-code-images` (V3, V3b, V4).
+
 ## Progress / next step
-Next: open slice 2 PR; then V5–V7.
+Next: open slice 2a/2b PRs; then V5–V7.
