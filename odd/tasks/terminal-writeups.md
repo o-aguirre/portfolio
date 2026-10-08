@@ -30,7 +30,7 @@ Reposition the portfolio as a cybersecurity portfolio: terminal visual identity 
 | 3 | `feature/terminal-writeups-restyle` | T7–T9 | slice 2 | `accaebc`, `014e39d`, `d58d7c9`, `8715151`, `9738263` |
 | 4a | `feature/terminal-writeups-i18n-core` | T10 | slice 3 | `77bc07e` (371 authored lines) |
 | 4b | `feature/terminal-writeups-i18n` | T11–T13 | slice 4a | `536c7ac`, `2a0fe35`, `4c040cc` (split from slice 4: 723 lines exceeded the ~400 budget), `cef10fd`, `0606b43` |
-| 5 | `feature/terminal-writeups-sections` | T14–T16 | slice 4b | — |
+| 5 | `feature/terminal-writeups-sections` | T14–T16 | slice 4b | `6ff4d97`, `2014ed2`, `b324d00` |
 
 ## Checklist
 - [x] T1 — Unblock build: rename `projects.jsx` → `Projects.jsx`. Route: inline (1 file). Evidence: `npm run build` ✓, commit `014b0e8`.
@@ -67,11 +67,11 @@ Reposition the portfolio as a cybersecurity portfolio: terminal visual identity 
 
 ## Progress / next step
 ### Slice 5 — sections (owner request)
-- [ ] T14 — Skills as `tree skills/`: remove AOS animation, the two-column layout and the outdated full-stack `skills.about` text; data in `src/data/skills.js` (categories → items, optional `tag` per item); item shows writeup count when its `tag` matches writeup tags; only known items prefilled under `foundation/`, security categories left as commented examples for the owner.
-- [ ] T15 — Certifications section `ls certs/`: data in `src/data/certs.js` (name, issuer, status earned|in-progress, optional year/url); section hidden while the list is empty; nav item `./certs`. Owner removes the `Certs` field from `src/data/profile.js` (file has owner's uncommitted edits — not touched).
-- [ ] T16 — Timeline section `git log --oneline`: data in `src/data/timeline.js` (date, kind track|seminar|ctf|cert|milestone, bilingual `{ en, es }` text); newest first; fake short hash derived deterministically from the entry; hidden while empty; nav item `./log`.
+- [x] T14 — Evidence: Route: delegated; RED (skillTree and Skills suites failed, modules/behavior missing) -> GREEN `npm test` 97/97; `npm run lint`, `npm run build` exit 0; gga passed; commit `6ff4d97`; deleted unused PNGs (js, tailwind-css, react, spring-boot, git). Skills as `tree skills/`: remove AOS animation, the two-column layout and the outdated full-stack `skills.about` text; data in `src/data/skills.js` (categories → items, optional `tag` per item); item shows writeup count when its `tag` matches writeup tags; only known items prefilled under `foundation/`, security categories left as commented examples for the owner.
+- [x] T15 — Evidence: Route: delegated; RED (3 suites failed, modules missing) -> GREEN `npm test` 109/109; lint, build exit 0; gga passed; commit `2014ed2`. Certifications section `ls certs/`: data in `src/data/certs.js` (name, issuer, status earned|in-progress, optional year/url); section hidden while the list is empty; nav item `./certs`. Owner removes the `Certs` field from `src/data/profile.js` (file has owner's uncommitted edits — not touched).
+- [x] T16 — Evidence: Route: delegated; RED (2 suites failed, modules missing) -> GREEN `npm test` 121/121; lint, build exit 0; first commit rejected by gga (nav target `log` did not match section id `timeline`) -> fixed with test, passed; commit `b324d00`. Timeline section `git log --oneline`: data in `src/data/timeline.js` (date, kind track|seminar|ctf|cert|milestone, bilingual `{ en, es }` text); newest first; fake short hash derived deterministically from the entry; hidden while empty; nav item `./log`.
 
-Next: owner reviews English about text + visual pass in both languages; fill profile.js; push/PR decision.
+Next: owner reviews English about text + visual pass in both languages; fill profile.js; owner fills src/data/skills.js security categories, certs.js, timeline.js; removes Certs from profile.js; push/PR decision.
 
 T13 (owner request): language switch redesigned as borderless `en / es` text buttons (one button per language, `aria-pressed`, labelled group), placed at the end of the right-aligned nav after a `│` divider. Route: inline. Evidence: RED 6 failing -> GREEN `npm test` 89/89, lint and build exit 0; gga passed; commit `4c040cc`.
 

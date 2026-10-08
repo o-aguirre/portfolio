@@ -1,14 +1,10 @@
 import NavLinkButton from './NavLinkButton'
 import LanguageToggle from './LanguageToggle'
+import { getNavItems } from '../../lib/sections'
 
-const listNavbar = [
-    {name: './home', target: 'home'},
-    {name: './writeups', target: 'writeups'},
-    {name: './skills', target: 'skills'},
-    {name: './contact', target: 'contact'}
-];
+const Navbar = ({ sections }) => {
+    const listNavbar = getNavItems(sections)
 
-const Navbar = () => {
     return (
         <header className="top-0 w-full z-50 bg-ansi-bg border-b border-ansi-raised font-mono">
             <div className="container mx-auto flex flex-wrap gap-3 p-5 flex-col md:flex-row items-center">

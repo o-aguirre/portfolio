@@ -10,6 +10,8 @@ const es = {
   "link.linkedin": "Perfil de LinkedIn",
   "skills.count.one": "1 writeup",
   "skills.count.other": "{n} writeups",
+  "certs.status.earned": "obtenida",
+  "certs.status.in-progress": "en curso",
   "contact.email": "correo:",
   "contact.message": "mensaje:",
   "contact.placeholder": "Deja un comentario...",
