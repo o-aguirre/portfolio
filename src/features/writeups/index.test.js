@@ -9,4 +9,8 @@ describe('writeups (real content)', () => {
     expect(sample.body).toContain('Recon')
     expect(writeups.list().length).toBeGreaterThan(0)
   })
+
+  it('has no invalid content files', () => {
+    expect(writeups.errors).toEqual([])
+  })
 })

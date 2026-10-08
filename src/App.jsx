@@ -1,14 +1,15 @@
-import { useEffect } from 'react';
-import Hero from './components/hero/Hero';
-import Projects from './components/projects/Projects';
-import Skills from './components/skills/Skills';
-import Contact from './components/contact/Contact';
-import Footer from './components/footer/Footer';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import { lazy, Suspense, useEffect } from 'react'
+import { Routes, Route } from 'react-router-dom'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 import './App.css'
+import HomePage from './pages/HomePage'
 
+const WriteupPage = lazy(() => import('./features/writeups/WriteupPage'))
 
+const NotFound = () => (
+    <p className="font-mono text-ansi-red p-5">bash: command not found (404)</p>
+)
 
 const App = () => {
 
@@ -20,11 +21,13 @@ const App = () => {
 
     return(
         <main className='bg-[#000000]'>
-            <Hero />
-            <Projects />
-            <Skills />
-            <Contact />
-            <Footer />
+            <Suspense fallback={<p className="font-mono text-ansi-gray p-5">loading...</p>}>
+                <Routes>
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="/writeups/:slug" element={<WriteupPage />} />
+                    <Route path="*" element={<NotFound />} />
+                </Routes>
+            </Suspense>
         </main>
     )
 }

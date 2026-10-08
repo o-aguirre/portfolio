@@ -26,7 +26,7 @@ Reposition the portfolio as a cybersecurity portfolio: terminal visual identity 
 | Slice | Branch | Tasks | Base | Commits |
 |---|---|---|---|---|
 | 1 | `feature/terminal-writeups` | T1–T4 | `main` | `014b0e8`..this doc commit (367 authored lines before it) |
-| 2 | `feature/terminal-writeups-ui` | T5–T6 | slice 1 | — |
+| 2 | `feature/terminal-writeups-ui` | T5–T6 | slice 1 | `4e2d437`, `998012d` |
 | 3 | `feature/terminal-writeups-restyle` | T7 | slice 2 | — |
 
 ## Checklist
@@ -35,8 +35,8 @@ Reposition the portfolio as a cybersecurity portfolio: terminal visual identity 
 - [x] T2 — Vitest + `npm test` script. Route: delegated. Evidence: `npm test` exit 0 (passWithNoTests), `npm run build` exit 0, commit `a29f702`.
 - [x] T3 — `@theme` tokens (font-mono JetBrains Mono via @fontsource, ANSI palette); remove dead `title-font`/`body-font`. Route: delegated. Evidence: `rg 'title-font|body-font' src` empty; lint, test, build exit 0; commit `9595d95`.
 - [x] T4 — Writeup content model (TDD): `src/features/writeups/` (`parseWriteup`, `createWriteupRepository`, glob wiring in `index.js`), `front-matter` dep, sample writeup; removed `passWithNoTests` (R3-001). Route: delegated. Evidence: RED (3 suites failed, modules missing) → first GREEN run 12/13 (YAML rolls `2025-02-31` into a valid Date) → fixed by validating the raw date text → 13/13; `npm test`, `npm run lint`, `npm run build` exit 0; commit `5b9fefb`.
-- [ ] T5 — HashRouter: `/` Home, `/writeups/:slug` lazy WriteupPage; navbar scroll helper (fixes `#home`).
-- [ ] T6 — Writeups UI (`ls -la` listing + markdown page with GFM + highlight); drop react-slick/slick-carousel and Projects.
+- [x] T5 — HashRouter: `/` Home, `/writeups/:slug` lazy WriteupPage; navbar scroll helper (fixes `#home`). Route: delegated. Evidence: RED (`scrollToSection` module missing, suite failed) → GREEN 3/3; `npm test`, `npm run lint`, `npm run build` exit 0; commit `4e2d437`.
+- [x] T6 — Writeups UI (`ls -la` listing + markdown page with GFM + highlight); drop react-slick/slick-carousel and Projects. Route: delegated. Evidence: RED (WriteupsSection module missing; WriteupPage stub failed 3 tests) → GREEN 21/21 tests; `npm run lint`, `npm run build` exit 0; `rg 'slick|image1' src` and `rg 'dangerouslySetInnerHTML|rehype-raw' src` empty; preview `/portfolio/` HTTP 200; commit `998012d`.
 - [ ] T7 — Restyle Hero/Navbar/Footer/Skills/Contact/App/index.html; fix a11y defects in touched lines.
 
 ## Acceptance criteria
@@ -51,4 +51,4 @@ Reposition the portfolio as a cybersecurity portfolio: terminal visual identity 
 - T4 (`bd2d9cf..49c6629`): assess risk medium (package-lock config change), `review_due=false` (`under_budget`) → pending in slice.
 
 ## Progress / next step
-Next: T5.
+Next: T7.
