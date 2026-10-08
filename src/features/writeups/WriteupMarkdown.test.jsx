@@ -92,3 +92,24 @@ describe('code blocks', () => {
     await waitFor(() => expect(screen.getByRole('status').textContent).toBe('copiado'))
   })
 })
+
+describe('images', () => {
+  it('resolves a relative image under the writeup folder', () => {
+    render('![nmap output](nmap.png "Open ports")')
+    const img = screen.getByRole('img', { name: 'nmap output' })
+    expect(img.getAttribute('src')).toBe(`${import.meta.env.BASE_URL}writeups/demo/nmap.png`)
+    expect(img.getAttribute('loading')).toBe('lazy')
+    expect(screen.getByText('Open ports').tagName).toBe('FIGCAPTION')
+  })
+
+  it('omits the caption when there is no title', () => {
+    const { container } = render('![alt](a.png)')
+    expect(container.querySelector('figcaption')).toBeNull()
+  })
+
+  it('renders nothing for a blocked source', () => {
+    const { container } = render('![x](javascript:alert(1))\n\n![y](../a.png)')
+    expect(container.querySelector('img')).toBeNull()
+    expect(container.querySelector('figure')).toBeNull()
+  })
+})

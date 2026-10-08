@@ -3,6 +3,7 @@ import remarkGfm from 'remark-gfm'
 import rehypeHighlight from 'rehype-highlight'
 import 'highlight.js/styles/github-dark.css'
 import rehypeFenceMeta from '../../lib/rehypeFenceMeta'
+import { resolveImageSrc } from '../../lib/writeupImages'
 import CodeBlock from './CodeBlock'
 
 // react-markdown passes `node` to every component; strip it before the DOM.
@@ -17,6 +18,24 @@ const ScrollableTable = ({ node, ...props }) => (
         <table className="border border-ansi-raised border-collapse" {...props} />
     </div>
 )
+
+// Images live in public/writeups/<slug>/; blocked sources render nothing.
+// eslint-disable-next-line no-unused-vars
+const markdownImage = (slug) => ({ node, src, alt, title }) => {
+    const resolved = resolveImageSrc(slug, src)
+    if (!resolved) return null
+    return (
+        <figure className="my-4">
+            <img
+                src={resolved}
+                alt={alt ?? ''}
+                loading="lazy"
+                className="max-w-full h-auto border border-ansi-raised rounded-md my-4"
+            />
+            {title && <figcaption className="text-sm text-ansi-gray">{title}</figcaption>}
+        </figure>
+    )
+}
 
 const markdownComponents = {
     h1: styled('h2', 'text-2xl font-bold text-ansi-green mt-8 mb-3'),
@@ -36,11 +55,11 @@ const markdownComponents = {
     table: ScrollableTable,
 }
 
-const WriteupMarkdown = ({ body }) => (
+const WriteupMarkdown = ({ slug, body }) => (
     <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeFenceMeta, rehypeHighlight]}
-        components={markdownComponents}
+        components={{ ...markdownComponents, img: markdownImage(slug) }}
     >
         {body}
     </ReactMarkdown>
