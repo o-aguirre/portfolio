@@ -78,4 +78,4 @@ Commit with a Conventional Commit, e.g. `feat(writeups): add HTB Example Machine
 
 Merging to `main` deploys automatically through GitHub Actions; there is no manual deploy step. Check the Actions tab if the page does not update.
 
-Only publish **retired** machines or ones the platform explicitly allows. HackTheBox forbids publishing writeups for active machines and challenges; DockerLabs machines are fine once the platform permits sharing. Never include live flags, passwords or personal data.
+Only publish **retired** machines or ones the platform explicitly allows. HackTheBox forbids publishing writeups for active machines and challenges; check each platform's own rules before publishing (for DockerLabs, TryHackMe and others). Never include live flags, credentials from real systems, or personal data; lab credentials that are part of the intended solution are fine.
