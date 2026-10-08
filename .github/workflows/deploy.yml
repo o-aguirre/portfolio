@@ -1,0 +1,36 @@
+name: Deploy
+
+# Every push to main runs the CI checks and publishes dist/ to GitHub Pages.
+# Requires the repository setting Settings > Pages > Source: GitHub Actions.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  check:
+    uses: ./.github/workflows/ci.yml
+    with:
+      upload-pages: true
+
+  # Only this job can publish: the check job installs and runs third-party
+  # code, so it never gets the Pages or OIDC token permissions.
+  deploy:
+    needs: check
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
