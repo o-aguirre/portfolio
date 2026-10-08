@@ -1,24 +1,9 @@
-import { certs as certsData } from '../data/certs.js'
-import { timeline as timelineData } from '../data/timeline.js'
-import { prepareCerts } from './certs.js'
-import { prepareTimeline } from './timeline.js'
-
-const BASE = [
-  { name: './home', target: 'home' },
+// Primary navigation. The brand links back to the top of the page, so there
+// is no `./home` item. `./about` groups skills, certs and timeline: it lands
+// on skills, the first of the three, and the other two follow below it
+// (each one still hides itself while it has no valid entries).
+export const NAV_ITEMS = [
   { name: './writeups', target: 'writeups' },
-  { name: './skills', target: 'skills' },
+  { name: './about', target: 'skills' },
+  { name: './contact', target: 'contact' },
 ]
-
-// Single source of truth for which sections exist; `./certs` and `./log`
-// only appear when they have at least one valid entry, matching when the
-// sections themselves render.
-export function getNavItems({ certs = certsData, timeline = timelineData } = {}) {
-  const hasCerts = prepareCerts(certs).items.length > 0
-  const hasTimeline = prepareTimeline(timeline).items.length > 0
-  return [
-    ...BASE,
-    ...(hasCerts ? [{ name: './certs', target: 'certs' }] : []),
-    ...(hasTimeline ? [{ name: './log', target: 'timeline' }] : []),
-    { name: './contact', target: 'contact' },
-  ]
-}

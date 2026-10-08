@@ -2,10 +2,8 @@
 import { describe, it, expect, afterEach } from 'vitest'
 import { screen, cleanup } from '@testing-library/react'
 import Timeline from './Timeline'
-import Navbar from '../navbar/Navbar'
 import { renderWithProviders } from '../../test/renderWithProviders'
 import { fakeHash } from '../../lib/timeline'
-import { getNavItems } from '../../lib/sections'
 
 afterEach(cleanup)
 
@@ -40,26 +38,5 @@ describe('Timeline', () => {
   it('renders nothing when empty', () => {
     const { container } = renderWithProviders(<Timeline items={[]} />)
     expect(container.querySelector('#timeline')).toBeNull()
-  })
-})
-
-describe('Navbar log item', () => {
-  it('hides ./log when the timeline is empty and shows it otherwise', () => {
-    renderWithProviders(<Navbar sections={{ certs: [], timeline: [] }} />)
-    expect(screen.queryByText('./log')).toBeNull()
-    cleanup()
-    renderWithProviders(<Navbar sections={{ certs: [], timeline: items }} />)
-    expect(screen.getByText('./log')).toBeTruthy()
-  })
-
-  it('points ./log at the id of the rendered timeline section', () => {
-    const { container } = renderWithProviders(
-      <>
-        <Navbar sections={{ certs: [], timeline: items }} />
-        <Timeline items={items} />
-      </>,
-    )
-    const target = getNavItems({ certs: [], timeline: items }).find((i) => i.name === './log').target
-    expect(container.querySelector(`#${target}`)).toBeTruthy()
   })
 })

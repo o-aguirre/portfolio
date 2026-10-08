@@ -23,17 +23,20 @@ Reposition the portfolio as a cybersecurity portfolio: terminal visual identity 
 - Strategy: `ask-on-risk`. Forecast ~700–900 authored changed lines → ask chain strategy before crossing ~400.
 - Chain strategy (owner choice): **stacked-to-main**. Push/PR creation remain the owner's decision.
 
-| Slice | Branch | Tasks | Base | Commits |
-|---|---|---|---|---|
-| 1 | `feature/terminal-writeups` | T1–T4 | `main` | `014b0e8`..this doc commit (367 authored lines before it) |
-| 2 | `feature/terminal-writeups-ui` | T5–T6 | slice 1 | `4e2d437`, `998012d`, `4f8fc01` |
-| 3 | `feature/terminal-writeups-restyle` | T7–T9 | slice 2 | `accaebc`, `014e39d`, `d58d7c9`, `8715151`, `9738263` |
-| 4a | `feature/terminal-writeups-i18n-core` | T10 | slice 3 | `77bc07e` (371 authored lines) |
-| 4b | `feature/terminal-writeups-i18n` | T11–T13 | slice 4a | `536c7ac`, `2a0fe35`, `4c040cc` (split from slice 4: 723 lines exceeded the ~400 budget), `cef10fd`, `0606b43` |
-| 5a | `feature/terminal-writeups-skills` | T14 | slice 4b | `6ff4d97` (256 authored lines) |
-| 5b | `feature/terminal-writeups-certs-log` | T15–T16 | slice 5a | `2014ed2`, `b324d00`, `fb587c2` (420 authored lines) |
-| 5c | `feature/terminal-writeups-sections` | T17, T17b, skills data | slice 5b | `811e029`, `d2ac732`, `6bd01cd` (split from slice 5: 676 lines exceeded the ~400 budget) |
-| 6 | `feature/terminal-writeups-contact` | T18 | slice 5c | `9c0ab92` |
+| Slice | Branch | Tasks | Base | PR | Lines (lockfile excl.) |
+|---|---|---|---|---|---|
+| 1 | `feature/terminal-writeups` | T1–T4 | `main` | #4 | 375 |
+| 2 | `feature/terminal-writeups-ui` | T5–T6b | slice 1 | #5 | 569 (size:exception) |
+| 3 | `feature/terminal-writeups-restyle` | T7–T9 | slice 2 | #6 | 517 (size:exception) |
+| 4a | `feature/terminal-writeups-i18n-core` | T10 | slice 3 | #7 | 379 |
+| 4b | `feature/terminal-writeups-i18n` | T11–T13 + fixes | slice 4a | #8 | 538 (size:exception) |
+| 5a | `feature/terminal-writeups-skills` | T14 | slice 4b | #9 | 264 |
+| 5b | `feature/terminal-writeups-certs-log` | T15–T16 | slice 5a | #10 | 424 (size:exception) |
+| 5c | `feature/terminal-writeups-sections` | T17, T17b, skills data | slice 5b | #11 | 285 |
+| 6a | `feature/terminal-writeups-contact-core` | T18, T18b | slice 5c | #12 | 466 (size:exception; T18 alone is 409) |
+| 6b | `feature/terminal-writeups-contact` | T19–T21 + whois alias | slice 6a | #13 | 269 + docs |
+
+All branches pushed 2026-10-07; PRs opened by the owner's request. Merge in order; after each merge, retarget the next PR to `main`.
 
 ## Checklist
 - [x] T1 — Unblock build: rename `projects.jsx` → `Projects.jsx`. Route: inline (1 file). Evidence: `npm run build` ✓, commit `014b0e8`.
@@ -80,7 +83,11 @@ Reposition the portfolio as a cybersecurity portfolio: terminal visual identity 
 - [x] T18 — Evidence: Route: delegated; RED (4 suites failed: obfuscate/contact modules missing, old form/EmailJS Contact; 1 translation test failed) -> GREEN `npm test` 144/144 (26 files); `npm run lint`, `npm run build` exit 0; `rg -i emailjs src package.json AGENTS.md` empty; gga passed; commit `9c0ab92`. Replace the EmailJS contact form with a `$ whois o-aguirre` block: channels in `src/data/contact.js` (email, github, linkedin, hackthebox, dockerlabs…; entries with empty value hidden); email stored and shown base64-encoded with a decode-and-copy button (decorative obfuscation, documented as not security); remove `@emailjs/browser` and the hardcoded IDs; update AGENTS.md rules that referenced EmailJS. Hero keeps the quick `ls links/`. Owner fills email and platform profiles (email is not published without the owner adding it).
 - Review T17b–T18 (`811e029..52c07f2`): medium, consent granted, review-reliability → approved, acknowledged (lineage `review-883249eac9e54f1a`). Reviewed boundary: `52c07f2`. Fixed right after (T18b): non-text rendered fields (objects) passed validation and would make React throw → shared `isText`/`isOptionalText`/`isOptionalHttpsUrl` applied to contact, certs and timeline; cert `url` now restricted to https (blocks `javascript:` hrefs); whitespace-only contact values treated as placeholders. RED 4 failing -> GREEN 148/148, lint and build exit 0.
 
-Next: owner reviews English about text + visual pass in both languages; fill profile.js; owner fills certs.js, timeline.js, contact.js; removes Certs from profile.js; push/PR decision.
+- [x] T19 — Footer reduced to `[exit 0] © year o-aguirre` (owner removed duplicated social links; dead code and tests cleaned). Route: inline. Evidence: RED 2 -> GREEN 150/150; commit `78cb3f1`.
+- [x] T20 — Navbar grouped to `./writeups ./about ./contact` (owner choice `./about` → #skills, followed by certs and timeline); brand links to #home, `./home` removed; static `NAV_ITEMS`. Route: inline. Evidence: RED 4 -> GREEN 148/148, lint and build exit 0; commit `b7094df`.
+- [x] T21 — Owner data committed: profile (Certs field removed), skills (web/privesc commented by owner), certs (Credly URLs), timeline, contact (email + HackTheBox; DockerLabs commented until the username is known). Format fixes: timeline date/kind/id, profile `': '` prefixes. Evidence: `npm test` 148/148 incl. real-data validation tests; no active `<id>`/`<user>`/`example.com`/`TODO` placeholders.
+
+Next: owner reviews PRs #4 → #13 and merges them in order (retarget each next PR to `main` after its parent merges); visual pass in both languages; optionally uncomment DockerLabs in contact.js. Pending RDD: `52c07f2..983e38d` (under budget, not yet reviewed).
 
 T13 (owner request): language switch redesigned as borderless `en / es` text buttons (one button per language, `aria-pressed`, labelled group), placed at the end of the right-aligned nav after a `│` divider. Route: inline. Evidence: RED 6 failing -> GREEN `npm test` 89/89, lint and build exit 0; gga passed; commit `4c040cc`.
 

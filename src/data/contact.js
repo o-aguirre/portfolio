@@ -6,7 +6,7 @@
 export const contact = [
   { id: 'github', label: 'github', value: 'github.com/o-aguirre', href: 'https://github.com/o-aguirre' },
   { id: 'linkedin', label: 'linkedin', value: 'linkedin.com/in/onesimo-aguirre', href: 'https://www.linkedin.com/in/onesimo-aguirre/' },
-  // { id: 'hackthebox', label: 'hackthebox', value: 'app.hackthebox.com/profile/<id>', href: 'https://app.hackthebox.com/profile/<id>' },
+  { id: 'hackthebox', label: 'hackthebox', value: 'app.hackthebox.com/profile/@mephibosheth', href: 'https://profile.hackthebox.com/profile/019cbf2f-4e72-71ae-ac10-cbd256d87e32?utm_medium=copy_url' },
   // { id: 'tryhackme', label: 'tryhackme', value: 'tryhackme.com/p/<user>', href: 'https://tryhackme.com/p/<user>' },
   // { id: 'dockerlabs', label: 'dockerlabs', value: 'dockerlabs.es/<user>', href: 'https://dockerlabs.es/<user>' },
 ]
@@ -14,4 +14,4 @@ export const contact = [
 // Your email address in plain text (e.g. 'name@example.com'); leave empty to
 // hide the email row. It is obfuscated in the rendered HTML, which is
 // decorative only and not a security measure.
-export const email = ''
+export const email = 'two.aguirre@gmail.com'

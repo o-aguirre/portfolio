@@ -4,7 +4,6 @@ import { screen, cleanup } from '@testing-library/react'
 import { Routes, Route } from 'react-router-dom'
 import Hero from '../components/hero/Hero'
 import Contact from '../components/contact/Contact'
-import Footer from '../components/footer/Footer'
 import HomePage from '../pages/HomePage'
 import WriteupsSection from '../features/writeups/WriteupsSection'
 import WriteupPage from '../features/writeups/WriteupPage'
@@ -54,12 +53,12 @@ describe('Contact', () => {
   })
 })
 
-describe('Footer', () => {
+describe('Hero links', () => {
   it('translates the link aria-labels', () => {
-    renderWithProviders(<Footer />, { lang: 'es' })
+    renderWithProviders(<Hero />, { lang: 'es' })
     expect(screen.getByLabelText('Perfil de LinkedIn')).toBeTruthy()
     cleanup()
-    renderWithProviders(<Footer />, { lang: 'en' })
+    renderWithProviders(<Hero />, { lang: 'en' })
     expect(screen.getByLabelText('LinkedIn profile')).toBeTruthy()
   })
 })

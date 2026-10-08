@@ -58,7 +58,7 @@ const Contact = ({ entries = contactData, email = emailData }) => {
         <section id="contact" className="font-mono text-ansi-fg">
             <div className="px-4 py-8 lg:py-16 mx-auto max-w-3xl">
                 <h2 className="mb-6 text-2xl sm:text-3xl font-bold break-words">
-                    <span className="text-ansi-green">$</span> whois o-aguirre
+                    <span className="text-ansi-green">$</span> whois mephibosheth
                 </h2>
                 <dl className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-2">
                     {email && <EmailRow email={email} />}
