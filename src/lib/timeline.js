@@ -1,4 +1,6 @@
-const KINDS = ['track', 'seminar', 'ctf', 'cert', 'milestone']
+import { partitionEntries } from './contentEntries.js'
+
+const KINDS =['track', 'seminar', 'ctf', 'cert', 'milestone']
 const DATE = /^\d{4}-(0[1-9]|1[0-2])$/
 
 // Decorative only: a 7-char hex string derived from the entry id with a
@@ -12,18 +14,21 @@ export function fakeHash(id) {
   return h.toString(16).padStart(8, '0').slice(0, 7)
 }
 
-// Validates entries (throws naming the entry id), sorts newest first and
-// attaches the decorative `hash`.
+function validate(entry) {
+  if (typeof entry.date !== 'string' || !DATE.test(entry.date)) return 'date must be YYYY-MM'
+  if (!KINDS.includes(entry.kind)) return `unknown kind "${entry.kind}"`
+  if (!entry.text?.en || !entry.text?.es) return 'text needs both en and es'
+  return null
+}
+
+// Skips invalid entries (reported in `errors` by id) so one bad entry never
+// blanks the page, sorts newest first and attaches the decorative `hash`.
 export function prepareTimeline(entries) {
-  for (const entry of entries) {
-    const fail = (reason) => {
-      throw new Error(`Invalid timeline entry "${entry.id}": ${reason}`)
-    }
-    if (typeof entry.date !== 'string' || !DATE.test(entry.date)) fail('date must be YYYY-MM')
-    if (!KINDS.includes(entry.kind)) fail(`unknown kind "${entry.kind}"`)
-    if (!entry.text?.en || !entry.text?.es) fail('text needs both en and es')
+  const { items, errors } = partitionEntries(entries, validate)
+  return {
+    items: items
+      .map((entry) => ({ ...entry, hash: fakeHash(entry.id) }))
+      .sort((a, b) => b.date.localeCompare(a.date)),
+    errors,
   }
-  return entries
-    .map((entry) => ({ ...entry, hash: fakeHash(entry.id) }))
-    .sort((a, b) => b.date.localeCompare(a.date))
 }

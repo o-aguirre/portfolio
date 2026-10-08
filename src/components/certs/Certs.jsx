@@ -4,10 +4,15 @@ import { useLanguage } from '../../i18n/useLanguage'
 
 const BADGE_COLOR = { earned: 'text-ansi-green', 'in-progress': 'text-ansi-amber' }
 
+// Content errors must be visible without blanking the whole site.
+for (const { id, message } of prepareCerts(certsData).errors) {
+    console.error(`Invalid cert "${id}" in src/data/certs.js: ${message}`)
+}
+
 const Certs = ({ items = certsData }) => {
     const { t } = useLanguage()
-    if (items.length === 0) return null
-    const rows = prepareCerts(items)
+    const rows = prepareCerts(items).items
+    if (rows.length === 0) return null
 
     return (
         <section id="certs" className="font-mono text-ansi-fg py-16">
