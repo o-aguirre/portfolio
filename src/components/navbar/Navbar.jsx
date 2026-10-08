@@ -1,9 +1,11 @@
 import NavLinkButton from './NavLinkButton'
+import LanguageToggle from './LanguageToggle'
 
 const listNavbar = [
     {name: './home', target: 'home'},
     {name: './writeups', target: 'writeups'},
-    {name: './skills', target: 'skills'}
+    {name: './skills', target: 'skills'},
+    {name: './contact', target: 'contact'}
 ];
 
 const Navbar = () => {
@@ -23,9 +25,7 @@ const Navbar = () => {
                         ))
                     }
                 </nav>
-                <NavLinkButton target="contact" className="inline-flex items-center border border-ansi-green text-ansi-green hover:bg-ansi-green hover:text-ansi-bg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ansi-green py-1 px-4 transition-colors duration-300 cursor-pointer">
-                    [ Contact me ]
-                </NavLinkButton>
+                <LanguageToggle />
             </div>
         </header>
     )

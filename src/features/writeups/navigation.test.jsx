@@ -3,6 +3,7 @@ import { describe, it, expect, afterEach, vi } from 'vitest'
 import { render, screen, cleanup, fireEvent } from '@testing-library/react'
 import { MemoryRouter, Routes, Route, useLocation } from 'react-router-dom'
 import App from '../../App'
+import { LanguageProvider } from '../../i18n/LanguageProvider'
 import NavLinkButton from '../../components/navbar/NavLinkButton'
 
 const scrollIntoView = vi.fn()
@@ -16,7 +17,9 @@ const renderApp = (path) => {
   Element.prototype.scrollIntoView = scrollIntoView
   return render(
     <MemoryRouter initialEntries={[path]}>
-      <App />
+      <LanguageProvider initialLang="en">
+        <App />
+      </LanguageProvider>
     </MemoryRouter>,
   )
 }

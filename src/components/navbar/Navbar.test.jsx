@@ -2,29 +2,36 @@
 import { describe, it, expect, afterEach } from 'vitest'
 import { render, screen, cleanup } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
+import { LanguageProvider } from '../../i18n/LanguageProvider'
 import Navbar from './Navbar'
 
 afterEach(cleanup)
 
-describe('Navbar', () => {
-  it('centers the section links between the brand and the contact button', () => {
-    render(
-      <MemoryRouter>
+const renderNavbar = () =>
+  render(
+    <MemoryRouter>
+      <LanguageProvider initialLang="en">
         <Navbar />
-      </MemoryRouter>,
-    )
+      </LanguageProvider>
+    </MemoryRouter>,
+  )
+
+describe('Navbar', () => {
+  it('centers the section links between the brand and the language toggle', () => {
+    renderNavbar()
     const nav = screen.getByRole('navigation', { name: 'Primary' })
     expect(nav.className).toContain('md:mx-auto')
   })
 
-  it('reaches contact only through the contact button', () => {
-    render(
-      <MemoryRouter>
-        <Navbar />
-      </MemoryRouter>,
-    )
+  it('lists ./contact in the nav menu', () => {
+    renderNavbar()
     const nav = screen.getByRole('navigation', { name: 'Primary' })
-    expect(nav.textContent).not.toContain('contact')
-    expect(screen.getByRole('button', { name: /contact me/i })).toBeTruthy()
+    expect(nav.textContent).toContain('./contact')
+  })
+
+  it('renders the language toggle instead of the contact button', () => {
+    renderNavbar()
+    expect(screen.queryByRole('button', { name: /contact me/i })).toBeNull()
+    expect(screen.getByRole('button', { name: /switch language/i })).toBeTruthy()
   })
 })
