@@ -44,6 +44,18 @@ describe('prepareCerts', () => {
     expect(errors[0].message).toMatch(/duplicate/)
   })
 
+  it('skips entries whose rendered fields are not text', () => {
+    const { items, errors } = prepareCerts([
+      ok({ id: 'a', name: { en: 'x' } }),
+      ok({ id: 'b', issuer: ['INE'] }),
+      ok({ id: 'c', year: { y: 2025 } }),
+      ok({ id: 'd', url: 'javascript:alert(1)' }),
+      ok({ id: 'e', year: 2025, url: 'https://example.com' }),
+    ])
+    expect(items.map((c) => c.id)).toEqual(['e'])
+    expect(errors.map((e) => e.id)).toEqual(['a', 'b', 'c', 'd'])
+  })
+
   it('does not mutate the input', () => {
     const input = [ok({ id: 'a', status: 'in-progress' }), ok({ id: 'b' })]
     prepareCerts(input)

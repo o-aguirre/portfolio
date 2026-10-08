@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
-import { describe, it, expect, afterEach, beforeEach, vi } from 'vitest'
-import { screen, cleanup, fireEvent, waitFor } from '@testing-library/react'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+import { screen, cleanup } from '@testing-library/react'
 import { Routes, Route } from 'react-router-dom'
 import Hero from '../components/hero/Hero'
 import Contact from '../components/contact/Contact'
@@ -11,11 +11,7 @@ import WriteupPage from '../features/writeups/WriteupPage'
 import App from '../App'
 import { renderWithProviders } from '../test/renderWithProviders'
 
-const send = vi.hoisted(() => vi.fn())
-vi.mock('@emailjs/browser', () => ({ default: { sendForm: send } }))
-
 beforeEach(() => {
-  send.mockReset()
   window.localStorage.clear()
 })
 afterEach(() => {
@@ -49,35 +45,12 @@ describe('Hero', () => {
 })
 
 describe('Contact', () => {
-  it('translates labels and placeholders', () => {
-    renderWithProviders(<Contact />, { lang: 'en' })
-    expect(screen.getByLabelText('email:')).toBeTruthy()
-    expect(screen.getByPlaceholderText('Leave a comment...')).toBeTruthy()
+  it('translates the whois block labels', () => {
+    renderWithProviders(<Contact entries={[]} email="a@b.co" />, { lang: 'en' })
+    expect(screen.getByRole('button', { name: '[ decode ]' })).toBeTruthy()
     cleanup()
-    renderWithProviders(<Contact />, { lang: 'es' })
-    expect(screen.getByLabelText('correo:')).toBeTruthy()
-    expect(screen.getByPlaceholderText('Deja un comentario...')).toBeTruthy()
-  })
-
-  it.each([
-    ['en', 'Message sent successfully!'],
-    ['es', '¡Mensaje enviado con éxito!'],
-  ])('shows the success status in %s', async (lang, text) => {
-    send.mockResolvedValue({ text: 'OK' })
-    const { container } = renderWithProviders(<Contact />, { lang })
-    fireEvent.submit(container.querySelector('form'))
-    await waitFor(() => expect(screen.getByRole('status').textContent).toContain(text))
-  })
-
-  it.each([
-    ['en', 'Failed to send message'],
-    ['es', 'No se pudo enviar el mensaje'],
-  ])('shows the error status in %s', async (lang, text) => {
-    vi.spyOn(console, 'log').mockImplementation(() => {})
-    send.mockRejectedValue({ text: 'boom' })
-    const { container } = renderWithProviders(<Contact />, { lang })
-    fireEvent.submit(container.querySelector('form'))
-    await waitFor(() => expect(screen.getByRole('status').textContent).toContain(text))
+    renderWithProviders(<Contact entries={[]} email="a@b.co" />, { lang: 'es' })
+    expect(screen.getByRole('button', { name: '[ decodificar ]' })).toBeTruthy()
   })
 })
 

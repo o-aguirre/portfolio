@@ -32,7 +32,8 @@ Reposition the portfolio as a cybersecurity portfolio: terminal visual identity 
 | 4b | `feature/terminal-writeups-i18n` | T11–T13 | slice 4a | `536c7ac`, `2a0fe35`, `4c040cc` (split from slice 4: 723 lines exceeded the ~400 budget), `cef10fd`, `0606b43` |
 | 5a | `feature/terminal-writeups-skills` | T14 | slice 4b | `6ff4d97` (256 authored lines) |
 | 5b | `feature/terminal-writeups-certs-log` | T15–T16 | slice 5a | `2014ed2`, `b324d00`, `fb587c2` (420 authored lines) |
-| 5c | `feature/terminal-writeups-sections` | T17 | slice 5b | T17 commit (split from slice 5: 676 lines exceeded the ~400 budget) |
+| 5c | `feature/terminal-writeups-sections` | T17, T17b, skills data | slice 5b | `811e029`, `d2ac732`, `6bd01cd` (split from slice 5: 676 lines exceeded the ~400 budget) |
+| 6 | `feature/terminal-writeups-contact` | T18 | slice 5c | `9c0ab92` |
 
 ## Checklist
 - [x] T1 — Unblock build: rename `projects.jsx` → `Projects.jsx`. Route: inline (1 file). Evidence: `npm run build` ✓, commit `014b0e8`.
@@ -75,7 +76,11 @@ Reposition the portfolio as a cybersecurity portfolio: terminal visual identity 
 - [x] T17 — Certs/timeline no longer throw on invalid owner data (would blank the page): `prepareCerts`/`prepareTimeline` return `{ items, errors }`, invalid entries skipped and logged once at module load, nav hides sections with no valid entries, tests assert real data has no errors; AGENTS.md rule generalized to all owner content. Route: inline (pattern already established in T6b). Evidence: RED 12 failing -> GREEN `npm test` 125/125, lint and build exit 0. Commit `811e029`.
 - Review T14–T17 (`1705b72..811e029`): medium, consent granted, review-reliability → approved, acknowledged (lineage `review-da83feb70ad322e8`). Reviewed boundary: `811e029`. Fixed right after (T17b): R3-001 entry without id crashed `fakeHash` (page blank); R3-002 missing/duplicate ids broke React keys → shared `partitionEntries` (object + unique non-empty string id, never throws). RED 4 failing -> GREEN 129/129, lint and build exit 0.
 
-Next: owner reviews English about text + visual pass in both languages; fill profile.js; owner fills src/data/skills.js security categories, certs.js, timeline.js; removes Certs from profile.js; push/PR decision.
+### Slice 6 — contact (owner request)
+- [x] T18 — Evidence: Route: delegated; RED (4 suites failed: obfuscate/contact modules missing, old form/EmailJS Contact; 1 translation test failed) -> GREEN `npm test` 144/144 (26 files); `npm run lint`, `npm run build` exit 0; `rg -i emailjs src package.json AGENTS.md` empty; gga passed; commit `9c0ab92`. Replace the EmailJS contact form with a `$ whois o-aguirre` block: channels in `src/data/contact.js` (email, github, linkedin, hackthebox, dockerlabs…; entries with empty value hidden); email stored and shown base64-encoded with a decode-and-copy button (decorative obfuscation, documented as not security); remove `@emailjs/browser` and the hardcoded IDs; update AGENTS.md rules that referenced EmailJS. Hero keeps the quick `ls links/`. Owner fills email and platform profiles (email is not published without the owner adding it).
+- Review T17b–T18 (`811e029..52c07f2`): medium, consent granted, review-reliability → approved, acknowledged (lineage `review-883249eac9e54f1a`). Reviewed boundary: `52c07f2`. Fixed right after (T18b): non-text rendered fields (objects) passed validation and would make React throw → shared `isText`/`isOptionalText`/`isOptionalHttpsUrl` applied to contact, certs and timeline; cert `url` now restricted to https (blocks `javascript:` hrefs); whitespace-only contact values treated as placeholders. RED 4 failing -> GREEN 148/148, lint and build exit 0.
+
+Next: owner reviews English about text + visual pass in both languages; fill profile.js; owner fills certs.js, timeline.js, contact.js; removes Certs from profile.js; push/PR decision.
 
 T13 (owner request): language switch redesigned as borderless `en / es` text buttons (one button per language, `aria-pressed`, labelled group), placed at the end of the right-aligned nav after a `│` divider. Route: inline. Evidence: RED 6 failing -> GREEN `npm test` 89/89, lint and build exit 0; gga passed; commit `4c040cc`.
 

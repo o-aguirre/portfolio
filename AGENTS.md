@@ -29,8 +29,8 @@ Review the **changed lines** of the staged files. Pre-existing issues in untouch
 - Never render writeup Markdown with `dangerouslySetInnerHTML`; use `react-markdown` (no raw HTML plugin).
 
 ## Security and config
-- No secrets in source. EmailJS service/template IDs belong in `import.meta.env` (`VITE_*`), not hardcoded in new code.
-- `console.log` is allowed only for the EmailJS response handling in `Contact.jsx`; reject it elsewhere. `console.error` is also allowed at module load in `src/features/writeups/index.js`, `src/components/certs/Certs.jsx` and `src/components/timeline/Timeline.jsx` to report invalid owner content once.
+- No secrets in source.
+- Reject `console.log`. `console.error` is allowed at module load in `src/features/writeups/index.js`, `src/components/certs/Certs.jsx`, `src/components/timeline/Timeline.jsx` and `src/components/contact/Contact.jsx` to report invalid owner content once.
 - Owner content (writeups, certs, timeline) must never blank the page: skip invalid entries, report them, and keep a test asserting the real data has no errors.
 
 ## Tests
