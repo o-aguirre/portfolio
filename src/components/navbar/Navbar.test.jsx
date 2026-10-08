@@ -17,10 +17,11 @@ const renderNavbar = () =>
   )
 
 describe('Navbar', () => {
-  it('centers the section links between the brand and the language toggle', () => {
+  it('pushes the section links and the language toggle to the right', () => {
     renderNavbar()
     const nav = screen.getByRole('navigation', { name: 'Primary' })
-    expect(nav.className).toContain('md:mx-auto')
+    expect(nav.className).toContain('md:ml-auto')
+    expect(nav.contains(screen.getByRole('group', { name: 'Language' }))).toBe(true)
   })
 
   it('lists ./contact in the nav menu', () => {
@@ -32,6 +33,6 @@ describe('Navbar', () => {
   it('renders the language toggle instead of the contact button', () => {
     renderNavbar()
     expect(screen.queryByRole('button', { name: /contact me/i })).toBeNull()
-    expect(screen.getByRole('button', { name: /switch language/i })).toBeTruthy()
+    expect(screen.getByRole('button', { name: 'Español' })).toBeTruthy()
   })
 })

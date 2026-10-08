@@ -24,7 +24,7 @@ Review the **changed lines** of the staged files. Pre-existing issues in untouch
 
 ## Routing and writeups
 - Routing uses `HashRouter` (GitHub Pages has no SPA fallback). Do not switch to `BrowserRouter`.
-- Writeups are Markdown files in `src/content/writeups/<slug>.md` with frontmatter: `title`, `date`, `platform`, `difficulty`, `tags`, `summary`.
+- Writeups are Markdown files in `src/content/writeups/<slug>.md` with frontmatter: `title`, `date`, `platform`, `difficulty`, `tags`, `summary`, `lang` (required, `en` or `es`; one language per writeup, not affected by the UI language toggle).
 - Writeup loading and parsing logic lives in `src/features/writeups/` and must have Vitest tests.
 - Never render writeup Markdown with `dangerouslySetInnerHTML`; use `react-markdown` (no raw HTML plugin).
 

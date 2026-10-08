@@ -1,18 +1,18 @@
 // @vitest-environment jsdom
 import { describe, it, expect, afterEach } from 'vitest'
-import { render, screen, cleanup } from '@testing-library/react'
-import { MemoryRouter, Routes, Route } from 'react-router-dom'
+import { screen, cleanup } from '@testing-library/react'
+import { Routes, Route } from 'react-router-dom'
+import { renderWithProviders } from '../../test/renderWithProviders'
 import WriteupPage from './WriteupPage'
 
 afterEach(cleanup)
 
 const renderAt = (path) =>
-  render(
-    <MemoryRouter initialEntries={[path]}>
-      <Routes>
-        <Route path="/writeups/:slug" element={<WriteupPage />} />
-      </Routes>
-    </MemoryRouter>,
+  renderWithProviders(
+    <Routes>
+      <Route path="/writeups/:slug" element={<WriteupPage />} />
+    </Routes>,
+    { route: path },
   )
 
 describe('WriteupPage', () => {
@@ -22,6 +22,16 @@ describe('WriteupPage', () => {
       screen.getByRole('heading', { level: 1, name: 'Example Machine' }),
     ).toBeTruthy()
     expect(document.title).toContain('Example Machine')
+  })
+
+  it('sets the writeup language on the article, whatever the UI language', () => {
+    const { container } = renderWithProviders(
+      <Routes>
+        <Route path="/writeups/:slug" element={<WriteupPage />} />
+      </Routes>,
+      { lang: 'es', route: '/writeups/htb-example-machine' },
+    )
+    expect(container.querySelector('article').getAttribute('lang')).toBe('en')
   })
 
   it('renders the markdown body', () => {
@@ -35,6 +45,13 @@ describe('WriteupPage', () => {
       screen.getByText('cat: does-not-exist.md: No such file or directory'),
     ).toBeTruthy()
     expect(screen.getByRole('link', { name: /cd \.\./ })).toBeTruthy()
+  })
+
+  it('echoes slugs with replacement patterns literally in the not-found message', () => {
+    renderAt('/writeups/a$&b$$c')
+    expect(
+      screen.getByText('cat: a$&b$$c.md: No such file or directory'),
+    ).toBeTruthy()
   })
 
   it('restores the previous document title on unmount', () => {

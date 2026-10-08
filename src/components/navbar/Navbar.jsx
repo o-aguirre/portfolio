@@ -16,7 +16,7 @@ const Navbar = () => {
                     <span className="text-ansi-green">o-aguirre@portfolio</span>
                     <span className="text-ansi-fg">:~$</span>
                 </span>
-                <nav aria-label="Primary" className="md:mx-auto flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
+                <nav aria-label="Primary" className="md:ml-auto flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
                     {
                         listNavbar.map((item) => (
                             <NavLinkButton key={item.target} target={item.target} className="text-ansi-fg hover:text-ansi-green focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ansi-green transition-colors duration-300 cursor-pointer">
@@ -24,8 +24,9 @@ const Navbar = () => {
                             </NavLinkButton>
                         ))
                     }
+                    <span aria-hidden="true" className="text-ansi-raised">│</span>
+                    <LanguageToggle />
                 </nav>
-                <LanguageToggle />
             </div>
         </header>
     )

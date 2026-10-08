@@ -28,7 +28,8 @@ Reposition the portfolio as a cybersecurity portfolio: terminal visual identity 
 | 1 | `feature/terminal-writeups` | T1–T4 | `main` | `014b0e8`..this doc commit (367 authored lines before it) |
 | 2 | `feature/terminal-writeups-ui` | T5–T6 | slice 1 | `4e2d437`, `998012d`, `4f8fc01` |
 | 3 | `feature/terminal-writeups-restyle` | T7–T9 | slice 2 | `accaebc`, `014e39d`, `d58d7c9`, `8715151`, `9738263` |
-| 4 | `feature/terminal-writeups-i18n` | T10–T12 | slice 3 | — |
+| 4a | `feature/terminal-writeups-i18n-core` | T10 | slice 3 | `77bc07e` (371 authored lines) |
+| 4b | `feature/terminal-writeups-i18n` | T11–T13 | slice 4a | `536c7ac`, `2a0fe35`, `4c040cc` (split from slice 4: 723 lines exceeded the ~400 budget) |
 
 ## Checklist
 - [x] T1 — Unblock build: rename `projects.jsx` → `Projects.jsx`. Route: inline (1 file). Evidence: `npm run build` ✓, commit `014b0e8`.
@@ -44,9 +45,9 @@ Reposition the portfolio as a cybersecurity portfolio: terminal visual identity 
 - [x] T8b — Hero layout fix (single terminal window, fastfetch grid, hexdump from lg) + owner copy markup; note: owner's copy edit landed inside 014e39d. Route: delegated. Evidence: `npm test` 44/44 (10 files), `npm run lint` and `npm run build` exit 0; `rg 'react-typed|ReactTyped' src package.json` empty (dependency uninstalled); navigation test no longer depends on the h1 wording; new test asserts 3 about paragraphs; commit `d58d7c9`. Pending: owner visual pass at ~1720px.
 - [x] T8c — hexdump moved to `$ xxd hello.txt` (first command, hidden on mobile); fastfetch runs with --logo none (owner choice). Route: delegated. Evidence: RED (3 tests failed: xxd block, `--logo none` prompt, no pre in Fastfetch) -> GREEN `npm test` 46/46 (10 files), `npm run lint` and `npm run build` exit 0; gga hook passed; commit `8715151`.
 - [x] T9 — Owner edits (removed `./contact` nav item, removed xxd block pending new art, fastfetch prompt back to plain `fastfetch`, rewritten about text) + fixes: nav centered (`md:mx-auto`), `<br />` spacers replaced by command blocks in a `space-y-8` body, dead `hello`/`toHexdump` code removed (`src/lib/hexdump.js` kept for later). Route: inline (mechanical, already-understood edits). Evidence: RED 2 failing (spacing block, nav centering) -> GREEN `npm test` 49/49, lint and build exit 0. Commit `9738263`.
-- [ ] T10 — i18n core: `LanguageProvider` context, `en`/`es` dictionaries, `useT()`; initial language from `localStorage` else `navigator.language`; sync `<html lang>`; navbar language toggle `[ EN | ES ]` replaces the contact button; `./contact` back in the nav menu (owner decision).
-- [ ] T11 — Translate UI strings (Hero output, about text, section headings, Skills, Contact labels/messages, Footer, writeups listing/page chrome). Shell commands stay in English. Owner reviews the English about text.
-- [ ] T12 — Writeups declare `lang: en|es` in frontmatter (required); listing shows `[EN]`/`[ES]`; the toggle does not filter or translate writeups (owner decision: one language per writeup).
+- [x] T10 — i18n core: `src/i18n/` (`en`/`es` flat dictionaries, `LanguageProvider`, `useLanguage()` returning `{ lang, setLang, t }`, fallback en then key); initial language from `localStorage` else `navigator.language`; `<html lang>` sync; navbar `[ EN | ES ]` toggle replaces the contact button; `./contact` back in the nav menu; `renderWithProviders` test helper. Route: delegated. Evidence: RED (3 suites failed, i18n modules missing) -> GREEN `npm test` 63/63; `npm run lint`, `npm run build` exit 0; gga hook passed; commit `77bc07e`.
+- [x] T11 — Translate UI strings (Hero h1/about, Skills prose, Contact labels/placeholders/status, Footer and link aria-labels, 404/loading, writeup not-found, empty listing, home document title). Shell commands stay in English; `profile.js` untouched. Route: delegated. Evidence: RED (11 new tests failed) -> GREEN `npm test` 80/80; `npm run lint`, `npm run build` exit 0; gga hook passed; commit `536c7ac`. Pending: owner reviews the English about text.
+- [x] T12 — Writeups declare `lang: en|es` (required, validated in `parseWriteup`); listing shows `[EN]`/`[ES]` badge (amber); `WriteupPage` sets `lang` on the article; toggle does not filter writeups; AGENTS.md rule updated. Route: delegated. Evidence: RED (10 tests failed) -> GREEN `npm test` 88/88; `npm run lint`, `npm run build` exit 0; gga hook passed; commit `2a0fe35`.
 
 ## Acceptance criteria
 - `npm test`, `npm run lint`, `npm run build` green.
@@ -64,4 +65,8 @@ Reposition the portfolio as a cybersecurity portfolio: terminal visual identity 
 - Follow-ups (SUGGESTION, non-blocking): Contact `role="status"` region should always render (screen-reader announcement); navigation tests should restore `scrollIntoView` (use `vi.spyOn` + `restoreAllMocks`); test the load-time `console.error` reporting in `writeups/index.js`.
 
 ## Progress / next step
-Next: owner fills src/data/profile.js, visual pass, push/PR decision.
+Next: owner reviews English about text + visual pass in both languages; fill profile.js; push/PR decision.
+
+T13 (owner request): language switch redesigned as borderless `en / es` text buttons (one button per language, `aria-pressed`, labelled group), placed at the end of the right-aligned nav after a `│` divider. Route: inline. Evidence: RED 6 failing -> GREEN `npm test` 89/89, lint and build exit 0; gga passed; commit `4c040cc`.
+
+Review T8–T13 (`fc86d4c..1705b72`): medium, consent granted, review-reliability → approved, acknowledged (lineage `review-b6b17c34fb9c840d`). Reviewed boundary: `1705b72`. Fixed right after: R3-001 slug echoed via `replace()` interpreted `$&`/`$$` patterns (RED test with slug `a$&b$$c` → replacer function → GREEN 90/90); R3-003 `translation.test.jsx` now restores mocks. Open: R3-002 `TODO:` placeholders in `src/data/profile.js` reach production — owner must fill before release.

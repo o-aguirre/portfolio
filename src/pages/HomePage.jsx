@@ -6,10 +6,16 @@ import Skills from '../components/skills/Skills'
 import Contact from '../components/contact/Contact'
 import Footer from '../components/footer/Footer'
 import { scrollToSection } from '../lib/scrollToSection'
+import { useLanguage } from '../i18n/useLanguage'
 
 const HomePage = () => {
     const { state } = useLocation()
     const scrollTarget = state?.scrollTo
+    const { t } = useLanguage()
+
+    useEffect(() => {
+        document.title = t('meta.title')
+    }, [t])
 
     useEffect(() => {
         if (scrollTarget) scrollToSection(scrollTarget)

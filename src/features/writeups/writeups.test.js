@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { createWriteupRepository } from './writeups.js'
 
 const raw = (title, date) =>
-  `---\ntitle: ${title}\ndate: ${date}\nplatform: CTF\nsummary: s\n---\nbody`
+  `---\ntitle: ${title}\ndate: ${date}\nplatform: CTF\nsummary: s\nlang: en\n---\nbody`
 
 const repo = createWriteupRepository({
   '/src/content/writeups/old.md': raw('Old', '2024-01-01'),

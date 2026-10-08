@@ -5,6 +5,7 @@ import remarkGfm from 'remark-gfm'
 import rehypeHighlight from 'rehype-highlight'
 import 'highlight.js/styles/github-dark.css'
 import { writeups } from './index.js'
+import { useLanguage } from '../../i18n/useLanguage'
 
 // react-markdown passes `node` to every component; strip it before the DOM.
 // eslint-disable-next-line no-unused-vars
@@ -44,6 +45,7 @@ const BackLink = () => (
 
 const WriteupPage = () => {
     const { slug } = useParams()
+    const { t } = useLanguage()
     const writeup = writeups.get(slug)
 
     useEffect(() => {
@@ -58,14 +60,14 @@ const WriteupPage = () => {
     if (!writeup) {
         return (
             <div className="font-mono p-5 container mx-auto">
-                <p className="text-ansi-red mb-4">cat: {slug}.md: No such file or directory</p>
+                <p className="text-ansi-red mb-4">{t('writeup.notFound').replace('{slug}', () => slug)}</p>
                 <BackLink />
             </div>
         )
     }
 
     return (
-        <article className="font-mono text-ansi-fg p-5 container mx-auto max-w-4xl">
+        <article lang={writeup.lang} className="font-mono text-ansi-fg p-5 container mx-auto max-w-4xl">
             <p className="mb-4">
                 <span className="text-ansi-green">onesimo@portfolio:~$</span> cat writeups/{writeup.slug}.md
             </p>

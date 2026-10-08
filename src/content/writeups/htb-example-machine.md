@@ -2,6 +2,7 @@
 title: Example Machine
 date: 2025-01-15
 platform: HackTheBox
+lang: en
 difficulty: Easy
 tags: [linux, web, privesc]
 summary: Template writeup showing the expected structure. Replace with a real one.
