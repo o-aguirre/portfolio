@@ -8,8 +8,6 @@ tags: [linux, web]
 summary: Weak credentials. Escalation with python3's binary
 ---
 
-# Pequeñas mentirosas
-
 - **IP:** 172.17.0.2
 - **OS:** Linux
 - **Difficulty:** Easy 
