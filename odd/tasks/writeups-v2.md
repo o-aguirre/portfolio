@@ -36,6 +36,7 @@ Make publishing writeups effortless and their pages compelling: automatic deploy
 - [ ] V5 — Optional frontmatter `os`, `target`, `services`, `hops` + header (eyebrow, title, lead, key/value row).
 - [ ] V6 — Phases: each `##` section as a numbered phase with vertical timeline.
 - [ ] V7 — Sidebar tree platform → difficulty → writeups with counts, current highlighted; collapsible on mobile.
+- [x] V8 — Vulnerabilities & mitigations section (owner request): optional `vulnerabilities` frontmatter list (severity critical|high|medium|low|info, title, cwe, owasp, impact, mitigation); invalid entries skipped and reported; sorted by severity; cards with severity-coloured border, badge, CWE (MITRE link) / OWASP chips; labels follow the writeup's language. Branch `feat/writeup-vulnerabilities` stacked on #19. Route: delegated (one writer). RED→GREEN: `vulnerabilities.test.js` failed on the missing module, then 14/14; parse/repository/real-content/page tests failed first (7), component test failed on the missing component, then all pass. Checks: `npm test` 208/208, `npm run lint` clean, `npm run build` ok. Commits `8d47444` (code, tests, i18n, template block) and `23d83a5` (docs). gga hook passed both.
 
 ## Acceptance criteria
 - PRs show green CI; merging to `main` deploys without local commands.
