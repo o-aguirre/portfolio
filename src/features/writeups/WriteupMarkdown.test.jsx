@@ -1,4 +1,5 @@
 // @vitest-environment jsdom
+import { useState } from 'react'
 import { describe, it, expect, afterEach, vi } from 'vitest'
 import { screen, cleanup, fireEvent, waitFor } from '@testing-library/react'
 import { renderWithProviders } from '../../test/renderWithProviders'
@@ -33,6 +34,13 @@ describe('code blocks', () => {
     expect(prompt.textContent).toBe('$')
     expect(container.querySelector('pre').textContent).toContain('uid=0(root)')
     expect(container.querySelector('pre').textContent).not.toContain('$ id\n')
+  })
+
+  it('keeps blank lines visible inside prompted blocks', () => {
+    const { container } = render(fence('bash', '$ id\n\nuid=0(root)'))
+    const lines = container.querySelectorAll('pre code > span')
+    expect(lines).toHaveLength(3)
+    expect(lines[1].textContent).not.toBe('')
   })
 
   it('keeps syntax highlighting for blocks without prompts', () => {
@@ -90,5 +98,52 @@ describe('code blocks', () => {
     render(fence('bash', '$ id'), { lang: 'es' })
     fireEvent.click(screen.getByRole('button', { name: 'Copiar comandos' }))
     await waitFor(() => expect(screen.getByRole('status').textContent).toBe('copiado'))
+  })
+})
+
+describe('images', () => {
+  it('resolves a relative image under the writeup folder', () => {
+    render('![nmap output](nmap.png "Open ports")')
+    const img = screen.getByRole('img', { name: 'nmap output' })
+    expect(img.getAttribute('src')).toBe(`${import.meta.env.BASE_URL}writeups/demo/nmap.png`)
+    expect(img.getAttribute('loading')).toBe('lazy')
+    expect(screen.getByText('Open ports').tagName).toBe('FIGCAPTION')
+  })
+
+  it('omits the caption when there is no title', () => {
+    const { container } = render('![alt](a.png)')
+    expect(container.querySelector('figcaption')).toBeNull()
+  })
+
+  it('does not nest a standalone image figure inside a paragraph', () => {
+    const { container } = render('Intro text.\n\n![nmap output](nmap.png)\n\nMore text.')
+    const figure = container.querySelector('figure')
+    expect(figure).toBeTruthy()
+    expect(figure.closest('p')).toBeNull()
+    expect(container.querySelectorAll('p')).toHaveLength(2)
+  })
+
+  it('keeps the same image element when the parent re-renders', () => {
+    // A parent re-render (e.g. a language toggle) must not remount images.
+    const Parent = () => {
+      const [count, setCount] = useState(0)
+      return (
+        <>
+          <button type="button" onClick={() => setCount(count + 1)}>rerender {count}</button>
+          <WriteupMarkdown slug="demo" body="![nmap output](nmap.png)" />
+        </>
+      )
+    }
+    const { container } = renderWithProviders(<Parent />)
+    const before = container.querySelector('img')
+    fireEvent.click(screen.getByRole('button', { name: /rerender/ }))
+    expect(screen.getByRole('button', { name: 'rerender 1' })).toBeTruthy()
+    expect(container.querySelector('img')).toBe(before)
+  })
+
+  it('renders nothing for a blocked source', () => {
+    const { container } = render('![x](javascript:alert(1))\n\n![y](../a.png)')
+    expect(container.querySelector('img')).toBeNull()
+    expect(container.querySelector('figure')).toBeNull()
   })
 })

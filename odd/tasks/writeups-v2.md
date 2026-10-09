@@ -24,15 +24,15 @@ Make publishing writeups effortless and their pages compelling: automatic deploy
 
 | Slice | Branch | Tasks | Base | PR |
 |---|---|---|---|---|
-| 1 | `ci/pages-deploy` | V1 | `main` | — |
-| 2 | `feat/writeup-code-images` | V2–V4 | slice 1 | — |
+| 1 | `ci/pages-deploy` | V1 | `main` | #16 (merged, first Actions deploy succeeded) |
+| 2 | `feat/writeup-code-images` | V2–V4 | slice 1 | — (commits `feda256`, `2b76e2f`, `7c7d03e`) |
 | 3 | `feat/writeup-page-v2` | V5–V7 | slice 2 | — |
 
 ## Checklist
 - [x] V1 — CI workflow (lint, test, build on ubuntu, `.nvmrc` = 26) + Pages deploy workflow (checkout v7, setup-node v7, configure-pages v6, upload-pages-artifact v5, deploy-pages v5); `gh-pages` dep and deploy scripts removed. Route: inline (mechanical config, already designed). Evidence: YAML parses; local `npm ci`, lint, `npm test` 148/148, build pass. CI run on the PR pending.
-- [ ] V2 — Code blocks as terminal windows: fence `title` meta, `$ ` prompt lines, copy button (commands only when prompts exist), i18n status.
-- [ ] V3 — Images from `public/writeups/<slug>/` via relative paths; `resolveImageSrc` (https allowed, other schemes rejected).
-- [ ] V4 — `docs/writing-writeups.md` authoring guide.
+- [x] V2 — Code blocks as terminal windows: fence `title` meta, `$ ` prompt lines, copy button (commands only when prompts exist), i18n status. Route: delegated (one writer). RED→GREEN: `codeBlock.test.js` failed on the missing module, then 8/8; component/plugin tests written first, passed with the implementation. Extracted `WriteupMarkdown.jsx` from `WriteupPage.jsx` so the body is testable with injected markdown. Commit `feda256`.
+- [x] V3 — Images from `public/writeups/<slug>/` via relative paths; `resolveImageSrc` (https allowed, other schemes rejected). Route: delegated. RED→GREEN: helper test failed on the missing module; image render tests failed (src unresolved, blocked image rendered), then 176/176. `public/writeups/.gitkeep` added. Commit `2b76e2f`.
+- [x] V4 — `docs/writing-writeups.md` authoring guide. Route: delegated. Commit `7c7d03e`. Checks (all three tasks): `npm test` 176/176, `npm run lint` clean, `npm run build` ok.
 - [ ] V5 — Optional frontmatter `os`, `target`, `services`, `hops` + header (eyebrow, title, lead, key/value row).
 - [ ] V6 — Phases: each `##` section as a numbered phase with vertical timeline.
 - [ ] V7 — Sidebar tree platform → difficulty → writeups with counts, current highlighted; collapsible on mobile.
@@ -46,5 +46,8 @@ Make publishing writeups effortless and their pages compelling: automatic deploy
 ## Review (RDD)
 - V1 (`main..08b7909`): high (shell in workflows), consent granted, 4 lenses → approved, acknowledged (lineage `review-d7d8e699730925eb`). Fixed right after: Pages/OIDC permissions moved to the deploy job only; actions pinned by commit SHA; deploy reuses `ci.yml` via `workflow_call` (no drifting duplicate steps; `configure-pages` dropped, not needed for Vite); this doc's stale "Next" and out-of-repo plan link. Open: Pages source must be switched to GitHub Actions before merging (gate, owner setting).
 
+- Slice 2 (`origin/main..539ecc4`): medium, consent granted, review-reliability → approved, acknowledged (lineage `review-c6bec28b3f98806c`). Fixed right after (V3b): image-only paragraphs unwrapped (no `<figure>` inside `<p>`); `%2e%2e` traversal and malformed encodings rejected; blank lines kept in prompted blocks; img component memoized per slug (test proven to fail without the memo). RED 4 → GREEN 181/181, lint and build pass.
+- Slice 2 split for review size: `feat/writeup-code-blocks` (V2, 405 lines) and `feat/writeup-code-images` (V3, V3b, V4).
+
 ## Progress / next step
-Next: owner switches Pages source to GitHub Actions → merge PR #16 → confirm the first Actions deploy; then V2.
+Next: open slice 2a/2b PRs; then V5–V7.

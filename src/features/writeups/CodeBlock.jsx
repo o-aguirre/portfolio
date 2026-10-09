@@ -23,7 +23,8 @@ const PromptLines = ({ text }) => (
                         <span className="text-ansi-fg">{line.text}</span>
                     </>
                 ) : (
-                    <span className="text-ansi-gray">{line.text}</span>
+                    // A block span with no text collapses; keep blank lines visible.
+                    <span className="text-ansi-gray">{line.text || ' '}</span>
                 )}
             </span>
         ))}
