@@ -15,3 +15,11 @@ describe('writeups (real content)', () => {
     expect(writeups.errors).toEqual([])
   })
 })
+
+describe('writeups (real content) vulnerabilities', () => {
+  it('parses the template findings without errors', () => {
+    const sample = writeups.get('htb-example-machine')
+    expect(sample.vulnerabilities.length).toBeGreaterThanOrEqual(2)
+    expect(sample.vulnerabilityErrors).toEqual([])
+  })
+})

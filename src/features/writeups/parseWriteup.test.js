@@ -75,3 +75,39 @@ describe('parseWriteup', () => {
     )
   })
 })
+
+describe('parseWriteup vulnerabilities', () => {
+  const withFindings = (yaml) =>
+    `---\ntitle: T\ndate: 2025-03-14\nplatform: CTF\nsummary: s\nlang: en\nvulnerabilities:\n${yaml}\n---\nbody`
+
+  const good = `  - severity: low\n    title: Banner\n    impact: Leaks version.\n    mitigation: Hide it.\n  - severity: critical\n    title: RCE\n    cwe: CWE-78\n    impact: Shell.\n    mitigation: Sanitize.`
+
+  it('defaults to no vulnerabilities', () => {
+    const w = parseWriteup(PATH, doc())
+    expect(w.vulnerabilities).toEqual([])
+    expect(w.vulnerabilityErrors).toEqual([])
+  })
+
+  it('passes prepared vulnerabilities through, sorted', () => {
+    const w = parseWriteup(PATH, withFindings(good))
+    expect(w.vulnerabilities.map((v) => v.title)).toEqual(['RCE', 'Banner'])
+    expect(w.vulnerabilities[0].cweUrl).toBe('https://cwe.mitre.org/data/definitions/78.html')
+    expect(w.vulnerabilityErrors).toEqual([])
+  })
+
+  it('keeps the writeup valid when a finding is bad and reports it', () => {
+    const bad = `${good}\n  - severity: nope\n    title: Broken\n    impact: i\n    mitigation: m`
+    const w = parseWriteup(PATH, withFindings(bad))
+    expect(w.title).toBe('T')
+    expect(w.vulnerabilities).toHaveLength(2)
+    expect(w.vulnerabilityErrors).toHaveLength(1)
+    expect(w.vulnerabilityErrors[0].message).toBe(
+      'Invalid vulnerability #3 in htb-demo.md: "Broken": "severity" must be one of critical, high, medium, low, info',
+    )
+  })
+
+  it('ignores a non-list vulnerabilities field', () => {
+    const w = parseWriteup(PATH, doc({ vulnerabilities: 'oops' }))
+    expect(w.vulnerabilities).toEqual([])
+  })
+})

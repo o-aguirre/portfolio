@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { writeups } from './index.js'
 import WriteupMarkdown from './WriteupMarkdown.jsx'
+import VulnerabilitiesSection from './VulnerabilitiesSection.jsx'
 import { useLanguage } from '../../i18n/useLanguage'
 
 const BackLink = () => (
@@ -48,6 +49,7 @@ const WriteupPage = () => {
                 ))}
             </p>
             <WriteupMarkdown slug={writeup.slug} body={writeup.body} />
+            <VulnerabilitiesSection items={writeup.vulnerabilities} lang={writeup.lang} />
             <div className="mt-10">
                 <BackLink />
             </div>

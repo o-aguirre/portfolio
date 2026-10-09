@@ -23,6 +23,15 @@ const en = {
   "writeup.notFound": "cat: {slug}.md: No such file or directory",
   "app.loading": "loading...",
   "app.notFound": "bash: command not found (404)",
+  "vuln.title": "Vulnerabilities & mitigations",
+  "vuln.intro": "Findings from compromising the machine and how to fix them, ordered by severity.",
+  "vuln.impact": "IMPACT",
+  "vuln.mitigation": "MITIGATION",
+  "vuln.severity.critical": "CRITICAL",
+  "vuln.severity.high": "HIGH",
+  "vuln.severity.medium": "MEDIUM",
+  "vuln.severity.low": "LOW",
+  "vuln.severity.info": "INFO",
 }
 
 export default en

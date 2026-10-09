@@ -46,3 +46,21 @@ describe('createWriteupRepository with invalid entries', () => {
     expect(repo.errors).toEqual([])
   })
 })
+
+describe('createWriteupRepository with bad vulnerabilities', () => {
+  const withBad = createWriteupRepository({
+    '/src/content/writeups/v.md':
+      '---\ntitle: V\ndate: 2025-01-01\nplatform: CTF\nsummary: s\nlang: en\nvulnerabilities:\n  - severity: nope\n    title: X\n    impact: i\n    mitigation: m\n  - severity: low\n    title: Y\n    impact: i\n    mitigation: m\n---\nbody',
+  })
+
+  it('keeps the writeup and its valid findings', () => {
+    expect(withBad.get('v').vulnerabilities.map((v) => v.title)).toEqual(['Y'])
+  })
+
+  it('reports each bad finding in errors', () => {
+    expect(withBad.errors).toHaveLength(1)
+    expect(withBad.errors[0].path).toBe('/src/content/writeups/v.md')
+    expect(withBad.errors[0].message).toMatch(/^Invalid vulnerability #1 in v\.md: /)
+    expect(withBad.errors[0].kind).toBe('vulnerability')
+  })
+})

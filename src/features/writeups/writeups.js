@@ -6,7 +6,11 @@ export function createWriteupRepository(modules) {
 
   for (const [path, raw] of Object.entries(modules)) {
     try {
-      parsed.push(parseWriteup(path, raw))
+      const writeup = parseWriteup(path, raw)
+      parsed.push(writeup)
+      for (const { message } of writeup.vulnerabilityErrors) {
+        errors.push({ path, message, kind: 'vulnerability' })
+      }
     } catch (error) {
       errors.push({ path, message: error.message })
     }

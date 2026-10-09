@@ -61,4 +61,13 @@ describe('WriteupPage', () => {
     unmount()
     expect(document.title).toBe('Original title')
   })
+
+  it('shows the vulnerabilities section after the body', () => {
+    renderAt('/writeups/htb-example-machine')
+    const heading = screen.getByRole('heading', { level: 2, name: 'Vulnerabilities & mitigations' })
+    const lastBodyHeading = screen.getByRole('heading', { name: 'Lessons learned' })
+    expect(
+      lastBodyHeading.compareDocumentPosition(heading) & Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy()
+  })
 })
