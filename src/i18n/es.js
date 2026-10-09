@@ -23,6 +23,15 @@ const es = {
   "writeup.notFound": "cat: {slug}.md: No existe el archivo o el directorio",
   "app.loading": "cargando...",
   "app.notFound": "bash: comando no encontrado (404)",
+  "vuln.title": "Vulnerabilidades y mitigaciones",
+  "vuln.intro": "Hallazgos al comprometer la máquina y cómo corregirlos, ordenados por severidad.",
+  "vuln.impact": "IMPACTO",
+  "vuln.mitigation": "MITIGACIÓN",
+  "vuln.severity.critical": "CRÍTICA",
+  "vuln.severity.high": "ALTA",
+  "vuln.severity.medium": "MEDIA",
+  "vuln.severity.low": "BAJA",
+  "vuln.severity.info": "INFO",
 }
 
 export default es

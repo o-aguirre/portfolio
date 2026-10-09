@@ -1,4 +1,5 @@
 import fm from 'front-matter'
+import { prepareVulnerabilities } from './vulnerabilities.js'
 
 const REQUIRED = ['title', 'date', 'platform', 'summary', 'lang']
 const LANGS = ['en', 'es']
@@ -47,6 +48,9 @@ export function parseWriteup(path, raw) {
     )
   }
 
+  // Bad findings are reported but never invalidate the whole writeup.
+  const { items, errors } = prepareVulnerabilities(attributes.vulnerabilities)
+
   return {
     slug: file.replace(/\.md$/, ''),
     title: String(attributes.title),
@@ -56,6 +60,11 @@ export function parseWriteup(path, raw) {
     tags: Array.isArray(attributes.tags) ? attributes.tags.map(String) : [],
     summary: String(attributes.summary),
     lang,
+    vulnerabilities: items,
+    vulnerabilityErrors: errors.map(({ index, message }) => ({
+      index,
+      message: `Invalid vulnerability #${index} in ${file}: ${message}`,
+    })),
     body,
   }
 }

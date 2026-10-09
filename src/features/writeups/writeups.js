@@ -6,7 +6,11 @@ export function createWriteupRepository(modules) {
 
   for (const [path, raw] of Object.entries(modules)) {
     try {
-      parsed.push(parseWriteup(path, raw))
+      const writeup = parseWriteup(path, raw)
+      parsed.push(writeup)
+      for (const { message } of writeup.vulnerabilityErrors) {
+        errors.push({ path, message, kind: 'vulnerability' })
+      }
     } catch (error) {
       errors.push({ path, message: error.message })
     }
@@ -21,3 +25,8 @@ export function createWriteupRepository(modules) {
     errors,
   }
 }
+
+// Console message for a repository error. Vulnerability errors already name
+// the file and the finding, so they are printed as-is.
+export const formatContentError = ({ path, message, kind }) =>
+  kind === 'vulnerability' ? message : `Invalid writeup ${path}: ${message}`

@@ -26,7 +26,7 @@ const renderApp = (path) => {
 
 describe('navigation from a writeup page', () => {
   it('goes home and scrolls to the writeups section via the back link', async () => {
-    renderApp('/writeups/htb-example-machine')
+    renderApp('/writeups/fixture-alpha-box')
     fireEvent.click(await screen.findByRole('link', { name: 'cd ..' }))
     expect(
       await screen.findByRole('heading', { level: 1 }),

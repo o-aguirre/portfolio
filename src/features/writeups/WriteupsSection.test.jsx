@@ -10,8 +10,8 @@ afterEach(cleanup)
 describe('WriteupsSection', () => {
   it('renders a link per writeup pointing to its route', () => {
     renderWithProviders(<WriteupsSection />)
-    const link = screen.getByRole('link', { name: 'Example Machine' })
-    expect(link.getAttribute('href')).toBe('/writeups/htb-example-machine')
+    const link = screen.getByRole('link', { name: 'Fixture Alpha Box' })
+    expect(link.getAttribute('href')).toBe('/writeups/fixture-alpha-box')
   })
 
   it('shows a language badge per row and does not filter by the UI language', () => {

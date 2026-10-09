@@ -64,7 +64,28 @@ Put files in `public/writeups/<slug>/` and reference them relatively:
 - The title in quotes becomes the caption.
 - Allowed: relative paths, `/absolute/in/public.png`, and `https://` URLs. Blocked (nothing is rendered): `http:`, `data:`, `javascript:`, `//host` and any path containing `..`.
 
-## 6. Before committing
+## 6. Vulnerabilities & mitigations
+
+Optionally list the findings in the frontmatter. They render as cards after the body, ordered by severity (critical to info):
+
+```yaml
+vulnerabilities:
+  - severity: high
+    title: Overly permissive sudo rule
+    cwe: CWE-250
+    owasp: "A01:2021 Broken Access Control"
+    impact: Any user in the group can run a binary as root.
+    mitigation: Remove the NOPASSWD rule and allow only specific commands.
+```
+
+- `severity` (required): `critical`, `high`, `medium`, `low` or `info`.
+- `title`, `impact`, `mitigation` (required): non-empty text.
+- `cwe` (optional): a positive number (`250`, `"250"` or `CWE-250`); it links to the MITRE definition.
+- `owasp` (optional): free text, shown as a chip. Quote values that contain `:`.
+- The section heading, intro, severity names and the IMPACT / MITIGATION labels follow the writeup's `lang`, not the UI language toggle. Write the finding texts in that same language.
+- An invalid finding is skipped and reported in the browser console as `Invalid vulnerability #N in <file>`; the rest of the writeup still renders.
+
+## 7. Before committing
 
 ```bash
 npm test        # includes the real-content checks
@@ -74,7 +95,7 @@ npm run build
 
 Commit with a Conventional Commit, e.g. `feat(writeups): add HTB Example Machine writeup`.
 
-## 7. Publishing
+## 8. Publishing
 
 Merging to `main` deploys automatically through GitHub Actions; there is no manual deploy step. Check the Actions tab if the page does not update.
 

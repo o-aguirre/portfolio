@@ -9,4 +9,7 @@ export default defineConfig({
     tailwindcss(),
   ],
   base: '/portfolio',
+  test: {
+    setupFiles: ['./src/test/setup.js'],
+  },
 })
