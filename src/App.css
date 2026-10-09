@@ -21,6 +21,31 @@
     background-color: var(--color-ansi-bg);
     color: var(--color-ansi-fg);
   }
+
+  /* Thin, low-contrast scrollbars that blend with the terminal surfaces.
+     Standard properties for Firefox/Chromium; ::-webkit-* covers Safari. */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in oklab, var(--color-ansi-gray) 15%, transparent) transparent;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: color-mix(in oklab, var(--color-ansi-gray) 45%, transparent);
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-ansi-gray);
+  }
 }
 
 html {
