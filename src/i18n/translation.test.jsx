@@ -67,7 +67,7 @@ describe('WriteupsSection', () => {
   it('keeps the shell command and the writeup content untouched in Spanish', () => {
     renderWithProviders(<WriteupsSection />, { lang: 'es' })
     expect(screen.getByText(/ls -la writeups\//)).toBeTruthy()
-    expect(screen.getByRole('link', { name: 'Example Machine' })).toBeTruthy()
+    expect(screen.getByRole('link', { name: 'Fixture Alpha Box' })).toBeTruthy()
   })
 })
 

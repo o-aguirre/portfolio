@@ -17,11 +17,11 @@ const renderAt = (path) =>
 
 describe('WriteupPage', () => {
   it('renders the writeup title and sets the document title', () => {
-    renderAt('/writeups/htb-example-machine')
+    renderAt('/writeups/fixture-alpha-box')
     expect(
-      screen.getByRole('heading', { level: 1, name: 'Example Machine' }),
+      screen.getByRole('heading', { level: 1, name: 'Fixture Alpha Box' }),
     ).toBeTruthy()
-    expect(document.title).toContain('Example Machine')
+    expect(document.title).toContain('Fixture Alpha Box')
   })
 
   it('sets the writeup language on the article, whatever the UI language', () => {
@@ -29,14 +29,14 @@ describe('WriteupPage', () => {
       <Routes>
         <Route path="/writeups/:slug" element={<WriteupPage />} />
       </Routes>,
-      { lang: 'es', route: '/writeups/htb-example-machine' },
+      { lang: 'es', route: '/writeups/fixture-alpha-box' },
     )
     expect(container.querySelector('article').getAttribute('lang')).toBe('en')
   })
 
   it('renders the markdown body', () => {
-    renderAt('/writeups/htb-example-machine')
-    expect(screen.getByRole('heading', { name: 'Recon' })).toBeTruthy()
+    renderAt('/writeups/fixture-alpha-box')
+    expect(screen.getByRole('heading', { name: 'Fixture recon' })).toBeTruthy()
   })
 
   it('shows a not-found message for an unknown slug', () => {
@@ -56,16 +56,16 @@ describe('WriteupPage', () => {
 
   it('restores the previous document title on unmount', () => {
     document.title = 'Original title'
-    const { unmount } = renderAt('/writeups/htb-example-machine')
-    expect(document.title).toBe('Example Machine')
+    const { unmount } = renderAt('/writeups/fixture-alpha-box')
+    expect(document.title).toBe('Fixture Alpha Box')
     unmount()
     expect(document.title).toBe('Original title')
   })
 
   it('shows the vulnerabilities section after the body', () => {
-    renderAt('/writeups/htb-example-machine')
+    renderAt('/writeups/fixture-alpha-box')
     const heading = screen.getByRole('heading', { level: 2, name: 'Vulnerabilities & mitigations' })
-    const lastBodyHeading = screen.getByRole('heading', { name: 'Lessons learned' })
+    const lastBodyHeading = screen.getByRole('heading', { name: 'Fixture closing notes' })
     expect(
       lastBodyHeading.compareDocumentPosition(heading) & Node.DOCUMENT_POSITION_FOLLOWING,
     ).toBeTruthy()
