@@ -25,3 +25,8 @@ export function createWriteupRepository(modules) {
     errors,
   }
 }
+
+// Console message for a repository error. Vulnerability errors already name
+// the file and the finding, so they are printed as-is.
+export const formatContentError = ({ path, message, kind }) =>
+  kind === 'vulnerability' ? message : `Invalid writeup ${path}: ${message}`

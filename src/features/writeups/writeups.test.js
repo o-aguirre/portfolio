@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { createWriteupRepository } from './writeups.js'
+import { createWriteupRepository, formatContentError } from './writeups.js'
 
 const raw = (title, date) =>
   `---\ntitle: ${title}\ndate: ${date}\nplatform: CTF\nsummary: s\nlang: en\n---\nbody`
@@ -62,5 +62,18 @@ describe('createWriteupRepository with bad vulnerabilities', () => {
     expect(withBad.errors[0].path).toBe('/src/content/writeups/v.md')
     expect(withBad.errors[0].message).toMatch(/^Invalid vulnerability #1 in v\.md: /)
     expect(withBad.errors[0].kind).toBe('vulnerability')
+  })
+})
+
+describe('formatContentError', () => {
+  it('prefixes invalid writeup files with their path', () => {
+    expect(formatContentError({ path: '/src/content/writeups/x.md', message: 'missing "title"' }))
+      .toBe('Invalid writeup /src/content/writeups/x.md: missing "title"')
+  })
+
+  it('prints vulnerability errors as-is, since they already name the file', () => {
+    const message = 'Invalid vulnerability #2 in x.md: "SQLi": unknown severity "huge"'
+    expect(formatContentError({ path: '/src/content/writeups/x.md', message, kind: 'vulnerability' }))
+      .toBe(message)
   })
 })

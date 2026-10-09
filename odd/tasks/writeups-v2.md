@@ -50,5 +50,9 @@ Make publishing writeups effortless and their pages compelling: automatic deploy
 - Slice 2 (`origin/main..539ecc4`): medium, consent granted, review-reliability → approved, acknowledged (lineage `review-c6bec28b3f98806c`). Fixed right after (V3b): image-only paragraphs unwrapped (no `<figure>` inside `<p>`); `%2e%2e` traversal and malformed encodings rejected; blank lines kept in prompted blocks; img component memoized per slug (test proven to fail without the memo). RED 4 → GREEN 181/181, lint and build pass.
 - Slice 2 split for review size: `feat/writeup-code-blocks` (V2, 405 lines) and `feat/writeup-code-images` (V3, V3b, V4).
 
+- Slice 2a/2b PRs: #18 (`feat/writeup-code-blocks` → main) and #19 (`feat/writeup-code-images` → #18); scrollbar styling (`80d65ca`, owner opacity 15% `5d5d92d`) on #18, merged up the chain.
+- V8 + test fixtures (`origin/feat/writeup-code-images..1869248`): medium, consent granted, review-reliability → approved, acknowledged (lineage `review-2faf0815d1c354aa`). Fixed right after: real-content test now proves every `.md` file loads (verified it fails with a broken glob, where the other checks passed vacuously); console message format extracted to `formatContentError` with tests. 213/213, lint and build pass.
+- UI tests now use `src/test/fixtures/writeups/` via a global mock in `src/test/setup.js`; only `index.test.js` reads real content. Verified green with the template deleted.
+
 ## Progress / next step
-Next: open slice 2a/2b PRs; then V5–V7.
+Next: owner merges #18 → #19 → V8 PR; then V5–V7 (page header, phases, sidebar).

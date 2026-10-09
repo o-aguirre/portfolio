@@ -4,7 +4,16 @@ import { describe, expect, it, vi } from 'vitest'
 vi.unmock('/src/features/writeups/index.js')
 const { writeups } = await vi.importActual('./index.js')
 
+// Counted independently of the repository, so a broken loader cannot make the
+// per-writeup loops below pass vacuously over an empty list.
+const contentFiles = Object.keys(import.meta.glob('/src/content/writeups/*.md'))
+
 describe('writeups (real content)', () => {
+  it('loads every markdown file in src/content/writeups', () => {
+    expect(writeups.list().length + writeups.errors.filter((e) => e.kind !== 'vulnerability').length)
+      .toBe(contentFiles.length)
+  })
+
   it('has no invalid content files', () => {
     expect(writeups.errors).toEqual([])
   })
