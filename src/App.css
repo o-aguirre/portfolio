@@ -26,7 +26,7 @@
      Standard properties for Firefox/Chromium; ::-webkit-* covers Safari. */
   * {
     scrollbar-width: thin;
-    scrollbar-color: color-mix(in oklab, var(--color-ansi-gray) 45%, transparent) transparent;
+    scrollbar-color: color-mix(in oklab, var(--color-ansi-gray) 15%, transparent) transparent;
   }
 
   ::-webkit-scrollbar {
